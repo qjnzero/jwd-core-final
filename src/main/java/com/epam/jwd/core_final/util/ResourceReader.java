@@ -2,6 +2,6 @@ package com.epam.jwd.core_final.util;
 
 import java.util.List;
 
-public interface ResourcesReader {
+public interface ResourceReader {
     List<String> read(String filePath);
 }
