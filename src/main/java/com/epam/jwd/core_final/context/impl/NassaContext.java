@@ -5,7 +5,6 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.populator.CrewPopulator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,8 +27,6 @@ public class NassaContext implements ApplicationContext {
      */
     @Override
     public void init() throws InvalidStateException {
-        CrewPopulator crewPopulator = new CrewPopulator();
-        crewMembers = crewPopulator.populateFromResource("asd");
         throw new InvalidStateException();
     }
 }
