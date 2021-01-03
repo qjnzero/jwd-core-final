@@ -1,5 +1,7 @@
 package com.epam.jwd.core_final.domain;
 
+import java.util.UUID;
+
 /**
  * Expected fields:
  * <p>
@@ -12,8 +14,8 @@ public abstract class AbstractBaseEntity implements BaseEntity {
 
     private final String name;
 
-    public AbstractBaseEntity(Long id, String name) {
-        this.id = id;
+    public AbstractBaseEntity(String name) {
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.name = name;
     }
 

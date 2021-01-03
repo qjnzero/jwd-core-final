@@ -24,10 +24,10 @@ public class FlightMission extends AbstractBaseEntity {
     private List<CrewMember> assignedCrew;
     private MissionResult missionResult;
 
-    public FlightMission(Long id, String name, String missionName, LocalDate startDate,
+    public FlightMission(String name, String missionName, LocalDate startDate,
                          LocalDate endDate, Long distance, Spaceship assignedSpaceShip,
                          List<CrewMember> assignedCrew, MissionResult missionResult) {
-        super(id, name);
+        super(name);
         this.missionName = missionName;
         this.startDate = startDate;
         this.endDate = endDate;
