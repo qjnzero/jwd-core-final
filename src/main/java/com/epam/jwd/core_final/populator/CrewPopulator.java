@@ -18,8 +18,9 @@ public class CrewPopulator implements Populator<CrewMember> {
         for (List<String> lines : reader.read(filePath)) {
             crewMembers.add(new CrewMember(
                     lines.get(1),
-                    Role.valueOf(lines.get(0)),
-                    Rank.valueOf(lines.get(2))));
+                    Role.resolveRoleById(Integer.parseInt(lines.get(0))),
+                    Rank.resolveRankById(Integer.parseInt(lines.get(2))))
+            );
         }
         return crewMembers;
     }

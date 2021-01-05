@@ -1,12 +1,10 @@
 package com.epam.jwd.core_final.populator;
 
-import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.util.SpaceshipsResourceReader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,7 +28,7 @@ public class SpaceshipPopulator implements Populator<Spaceship> {
     private Map<Role, Short> mapperFromStringToMapRoleAndShort(String source) {
         Map<Role, Short> crew = new LinkedHashMap<>();
         source = source.substring(1, source.length() - 1);
-        String[] crewPairs = source.split(" ");
+        String[] crewPairs = source.split(",");
         for (String crewPair : crewPairs) {
             String[] roleAndAmount = crewPair.split(":");
             crew.put(Role.resolveRoleById(Integer.parseInt(roleAndAmount[0])), Short.parseShort(roleAndAmount[1]));
