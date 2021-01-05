@@ -13,16 +13,16 @@ import java.util.stream.Stream;
 
 public class SpaceshipsResourceReader implements ResourceReader {
 
-    private static final String SHARP = "#";
-    private static final String SEMICOLON = ";";
+    private static final char SHARP = '#';
+    private static final char SEMICOLON = ';';
 
     @Override
     public List<List<String>> read(String filePath) {
         List<List<String>> spaceships = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             spaceships = stream
-                    .filter(line -> !line.startsWith(SHARP))
-                    .map(str -> Arrays.asList(str.split(SEMICOLON)))
+                    .filter(line -> !line.startsWith(String.valueOf(SHARP)))
+                    .map(str -> Arrays.asList(str.split(String.valueOf(SEMICOLON))))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();

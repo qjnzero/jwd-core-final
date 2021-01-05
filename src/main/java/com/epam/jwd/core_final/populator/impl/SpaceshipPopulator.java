@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class SpaceshipPopulator implements Populator<Spaceship> {
 
-    private static final String COMMA = ",";
-    private static final String COLON = ":";
+    private static final char COMMA = ',';
+    private static final char COLON = ':';
 
     @Override
     public Collection<Spaceship> populateFromResources(String filePath) {
@@ -33,9 +33,9 @@ public class SpaceshipPopulator implements Populator<Spaceship> {
     private Map<Role, Short> mapperFromStringToMapRoleAndShort(String source) {
         Map<Role, Short> crew = new LinkedHashMap<>();
         source = source.substring(1, source.length() - 1);
-        String[] crewPairs = source.split(COMMA);
+        String[] crewPairs = source.split(String.valueOf(COMMA));
         for (String crewPair : crewPairs) {
-            String[] roleAndAmount = crewPair.split(COLON);
+            String[] roleAndAmount = crewPair.split(String.valueOf(COLON));
             crew.put(Role.resolveRoleById(Integer.parseInt(roleAndAmount[0])), Short.parseShort(roleAndAmount[1]));
         }
         return crew;

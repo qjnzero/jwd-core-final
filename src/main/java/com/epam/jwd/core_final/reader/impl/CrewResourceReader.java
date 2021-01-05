@@ -13,18 +13,18 @@ import java.util.stream.Stream;
 
 public class CrewResourceReader implements ResourceReader {
 
-    private static final String SHARP = "#";
-    private static final String SEMICOLON = ";";
-    private static final String COMMA = ",";
+    private static final char SHARP = '#';
+    private static final char SEMICOLON = ';';
+    private static final char COMMA = ',';
 
     @Override
     public List<List<String>> read(String filePath) {
         List<List<String>> crews = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             crews = stream
-                    .filter(line -> !line.startsWith(SHARP))
-                    .map(str -> Arrays.asList(str.split(SEMICOLON)))
-                    .flatMap(list -> list.stream().map(str -> Arrays.asList(str.split(COMMA))))
+                    .filter(line -> !line.startsWith(String.valueOf(SHARP)))
+                    .map(str -> Arrays.asList(str.split(String.valueOf(SEMICOLON))))
+                    .flatMap(list -> list.stream().map(str -> Arrays.asList(str.split(String.valueOf(COMMA)))))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
