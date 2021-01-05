@@ -1,4 +1,6 @@
-package com.epam.jwd.core_final.util;
+package com.epam.jwd.core_final.util.impl;
+
+import com.epam.jwd.core_final.util.ResourceReader;
 
 import java.io.IOException;
 import java.nio.file.Files;

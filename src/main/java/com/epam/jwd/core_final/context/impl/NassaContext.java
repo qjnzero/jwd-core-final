@@ -6,8 +6,8 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.populator.CrewPopulator;
-import com.epam.jwd.core_final.populator.SpaceshipPopulator;
+import com.epam.jwd.core_final.populator.impl.CrewPopulator;
+import com.epam.jwd.core_final.populator.impl.SpaceshipPopulator;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 
 import java.util.ArrayList;
