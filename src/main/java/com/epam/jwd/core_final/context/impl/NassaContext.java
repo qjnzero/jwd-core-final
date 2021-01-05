@@ -37,7 +37,6 @@ public class NassaContext implements ApplicationContext {
         } else {
             return Collections.emptyList();
         }
-
     }
 
     /**

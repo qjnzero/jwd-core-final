@@ -4,6 +4,7 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 
 import java.util.Collection;
 
+@FunctionalInterface
 public interface Populator<T extends BaseEntity> {
 
     Collection<T> populateFromResources(String filePath);
