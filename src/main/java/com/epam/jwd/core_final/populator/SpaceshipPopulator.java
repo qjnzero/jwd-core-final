@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SpaceshipPopulator implements Populator<Spaceship> {
+
     @Override
     public Collection<Spaceship> populateFromResources(String filePath) {
         List<Spaceship> spaceships = new ArrayList<>();

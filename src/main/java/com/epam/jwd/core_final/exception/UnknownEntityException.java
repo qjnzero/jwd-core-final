@@ -3,6 +3,7 @@ package com.epam.jwd.core_final.exception;
 public class UnknownEntityException extends RuntimeException {
 
     private final String entityName;
+
     private final Object[] args;
 
     public UnknownEntityException(String entityName) {

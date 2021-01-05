@@ -3,6 +3,7 @@ package com.epam.jwd.core_final.domain;
 import com.epam.jwd.core_final.exception.UnknownEntityException;
 
 public enum Rank implements BaseEntity {
+
     TRAINEE(1L),
     SECOND_OFFICER(2L),
     FIRST_OFFICER(3L),

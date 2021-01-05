@@ -3,6 +3,7 @@ package com.epam.jwd.core_final.domain;
 import com.epam.jwd.core_final.exception.UnknownEntityException;
 
 public enum Role implements BaseEntity {
+
     MISSION_SPECIALIST(1L),
     FLIGHT_ENGINEER(2L),
     PILOT(3L),

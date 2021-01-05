@@ -14,14 +14,11 @@ public class SpaceshipsResourceReader implements ResourceReader {
     @Override
     public List<List<String>> read(String filePath) {
         List<List<String>> spaceships = new ArrayList<>();
-
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-
             spaceships = stream
                     .filter(line -> !line.startsWith("#"))
                     .map(str -> Arrays.asList(str.split(";")))
                     .collect(Collectors.toList());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

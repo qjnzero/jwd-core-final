@@ -40,6 +40,7 @@ public class NassaContext implements ApplicationContext {
      * You have to read input files, populate collections
      * @throws InvalidStateException
      */
+
     @Override
     public void init() throws InvalidStateException {
         applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
