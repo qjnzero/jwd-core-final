@@ -4,6 +4,7 @@ import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
+import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.service.CrewService;
@@ -20,7 +21,7 @@ public class CrewMemberService implements CrewService {
     private final EntityFactory<CrewMember> crewMemberFactory;
 
     public CrewMemberService(CrewMemberFactory crewMemberFactory) {
-        crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class);
+        crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class); // redo
         this.crewMemberFactory = crewMemberFactory;
     }
 
@@ -41,12 +42,13 @@ public class CrewMemberService implements CrewService {
 
     @Override
     public CrewMember updateCrewMemberDetails(CrewMember crewMember) {
-        return null; // how to find out what crewMember I should update
+        crewMember.setRank(Rank.CAPTAIN);
+        return crewMember;
     }
 
     @Override
     public void assignCrewMemberOnMission(CrewMember crewMember) throws RuntimeException {
-        crewMember.setReadyForNextMissions(true);
+        crewMember.setReadyForNextMissions(true); // redo
     }
 
     @Override
