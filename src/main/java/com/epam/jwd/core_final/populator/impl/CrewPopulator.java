@@ -4,7 +4,7 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.populator.Populator;
-import com.epam.jwd.core_final.util.impl.CrewResourceReader;
+import com.epam.jwd.core_final.reader.impl.CrewResourceReader;
 
 import java.util.ArrayList;
 import java.util.Collection;

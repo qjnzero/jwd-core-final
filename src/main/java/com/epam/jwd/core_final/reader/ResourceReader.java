@@ -1,4 +1,4 @@
-package com.epam.jwd.core_final.util;
+package com.epam.jwd.core_final.reader;
 
 import java.util.List;
 

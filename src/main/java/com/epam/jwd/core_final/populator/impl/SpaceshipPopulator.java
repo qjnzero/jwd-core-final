@@ -3,7 +3,7 @@ package com.epam.jwd.core_final.populator.impl;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.populator.Populator;
-import com.epam.jwd.core_final.util.impl.SpaceshipsResourceReader;
+import com.epam.jwd.core_final.reader.impl.SpaceshipsResourceReader;
 
 import java.util.ArrayList;
 import java.util.Collection;
