@@ -1,7 +1,11 @@
 package com.epam.jwd.core_final.populator.impl;
 
+import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.factory.EntityFactory;
+import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
+import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.populator.Populator;
 import com.epam.jwd.core_final.reader.impl.SpaceshipsResourceReader;
 
@@ -18,10 +22,11 @@ public class SpaceshipPopulator implements Populator<Spaceship> {
 
     @Override
     public Collection<Spaceship> populateFromResources(String filePath) {
+        EntityFactory<Spaceship> spaceshipFactory = new SpaceshipFactory();
         List<Spaceship> spaceships = new ArrayList<>();
         SpaceshipsResourceReader reader = new SpaceshipsResourceReader();
         for (List<String> lines: reader.read(filePath)) {
-            spaceships.add(new Spaceship(
+            spaceships.add(spaceshipFactory.create(
                     lines.get(0),
                     mapperFromStringToMapRoleAndShort(lines.get(2)),
                     Long.parseLong(lines.get(1))
