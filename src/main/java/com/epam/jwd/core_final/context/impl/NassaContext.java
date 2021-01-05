@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
+import com.epam.jwd.core_final.populator.Populator;
 import com.epam.jwd.core_final.populator.impl.CrewPopulator;
 import com.epam.jwd.core_final.populator.impl.SpaceshipPopulator;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
@@ -17,7 +18,11 @@ import java.util.Collections;
 // todo
 public class NassaContext implements ApplicationContext {
 
-    private ApplicationProperties applicationProperties;
+    private static final ApplicationProperties applicationProperties;
+
+    static {
+        applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
+    }
 
     // no getters/setters for them
     private Collection<CrewMember> crewMembers = new ArrayList<>();
@@ -27,13 +32,12 @@ public class NassaContext implements ApplicationContext {
     public <T extends BaseEntity> Collection<? extends BaseEntity> retrieveBaseEntityList(Class<T> tClass) {
         if (tClass.equals(CrewMember.class) && crewMembers != null) {
             return crewMembers;
-        }
-
-        if (tClass.equals(Spaceship.class) && spaceships != null) {
+        } else if (tClass.equals(Spaceship.class) && spaceships != null) {
             return spaceships;
+        } else {
+            return Collections.emptyList();
         }
 
-        return Collections.emptyList();
     }
 
     /**
@@ -43,7 +47,6 @@ public class NassaContext implements ApplicationContext {
 
     @Override
     public void init() throws InvalidStateException {
-        applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
         try {
             readCrewResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getCrewFileName());
@@ -55,12 +58,12 @@ public class NassaContext implements ApplicationContext {
     }
 
     private void readCrewResourcesFrom(String filePath) {
-        CrewPopulator crewPopulator = new CrewPopulator();
+        Populator<CrewMember> crewPopulator = new CrewPopulator();
         crewMembers = crewPopulator.populateFromResources(filePath);
     }
 
     private void readSpaceshipResourcesFrom(String filePath) {
-        SpaceshipPopulator spaceshipPopulator = new SpaceshipPopulator();
+        Populator<Spaceship> spaceshipPopulator = new SpaceshipPopulator();
         spaceships = spaceshipPopulator.populateFromResources(filePath);
     }
 }
