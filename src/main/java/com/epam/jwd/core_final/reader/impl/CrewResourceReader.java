@@ -15,7 +15,7 @@ public class CrewResourceReader implements ResourceReader {
 
     private static final String SHARP = "#";
     private static final String SEMICOLON = ";";
-    private static final String COLON = ",";
+    private static final String COMMA = ",";
 
     @Override
     public List<List<String>> read(String filePath) {
@@ -24,7 +24,7 @@ public class CrewResourceReader implements ResourceReader {
             crews = stream
                     .filter(line -> !line.startsWith(SHARP))
                     .map(str -> Arrays.asList(str.split(SEMICOLON)))
-                    .flatMap(list -> list.stream().map(str -> Arrays.asList(str.split(COLON))))
+                    .flatMap(list -> list.stream().map(str -> Arrays.asList(str.split(COMMA))))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();

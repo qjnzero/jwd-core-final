@@ -13,6 +13,9 @@ import java.util.Map;
 
 public class SpaceshipPopulator implements Populator<Spaceship> {
 
+    private static final String COMMA = ",";
+    private static final String COLON = ":";
+
     @Override
     public Collection<Spaceship> populateFromResources(String filePath) {
         List<Spaceship> spaceships = new ArrayList<>();
@@ -30,9 +33,9 @@ public class SpaceshipPopulator implements Populator<Spaceship> {
     private Map<Role, Short> mapperFromStringToMapRoleAndShort(String source) {
         Map<Role, Short> crew = new LinkedHashMap<>();
         source = source.substring(1, source.length() - 1);
-        String[] crewPairs = source.split(",");
+        String[] crewPairs = source.split(COMMA);
         for (String crewPair : crewPairs) {
-            String[] roleAndAmount = crewPair.split(":");
+            String[] roleAndAmount = crewPair.split(COLON);
             crew.put(Role.resolveRoleById(Integer.parseInt(roleAndAmount[0])), Short.parseShort(roleAndAmount[1]));
         }
         return crew;
