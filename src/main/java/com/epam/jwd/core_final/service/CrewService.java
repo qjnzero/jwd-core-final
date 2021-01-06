@@ -14,9 +14,9 @@ public interface CrewService {
 
     List<CrewMember> findAllCrewMembers();
 
-    List<CrewMember> findAllCrewMembersByCriteria(Criteria<? extends CrewMember> criteria);
+    List<CrewMember> findAllCrewMembersByCriteria(Criteria<CrewMember> criteria);
 
-    Optional<CrewMember> findCrewMemberByCriteria(Criteria<? extends CrewMember> criteria);
+    Optional<CrewMember> findCrewMemberByCriteria(Criteria<CrewMember> criteria);
 
     CrewMember updateCrewMemberDetails(CrewMember crewMember);
 

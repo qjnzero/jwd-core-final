@@ -31,12 +31,12 @@ public class CrewMemberService implements CrewService {
     }
 
     @Override
-    public List<CrewMember> findAllCrewMembersByCriteria(Criteria<? extends CrewMember> criteria) {
+    public List<CrewMember> findAllCrewMembersByCriteria(Criteria<CrewMember> criteria) {
         return null;
     }
 
     @Override
-    public Optional<CrewMember> findCrewMemberByCriteria(Criteria<? extends CrewMember> criteria) {
+    public Optional<CrewMember> findCrewMemberByCriteria(Criteria<CrewMember> criteria) {
         return Optional.empty();
     }
 
