@@ -14,9 +14,9 @@ public interface SpaceshipService {
 
     List<Spaceship> findAllSpaceships();
 
-    List<Spaceship> findAllSpaceshipsByCriteria(Criteria<? extends Spaceship> criteria);
+    List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria); // changed signature
 
-    Optional<Spaceship> findSpaceshipByCriteria(Criteria<? extends Spaceship> criteria);
+    Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria); // changed signature
 
     Spaceship updateSpaceshipDetails(Spaceship spaceship);
 

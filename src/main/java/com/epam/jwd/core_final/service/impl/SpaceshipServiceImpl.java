@@ -30,12 +30,12 @@ public class SpaceshipServiceImpl implements SpaceshipService {
     }
 
     @Override
-    public List<Spaceship> findAllSpaceshipsByCriteria(Criteria<? extends Spaceship> criteria) {
+    public List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria) {
         return null;
     }
 
     @Override
-    public Optional<Spaceship> findSpaceshipByCriteria(Criteria<? extends Spaceship> criteria) {
+    public Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria) {
         return Optional.empty();
     }
 
