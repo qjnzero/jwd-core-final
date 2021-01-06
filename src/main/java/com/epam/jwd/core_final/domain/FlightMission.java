@@ -30,8 +30,8 @@ public class FlightMission extends AbstractBaseEntity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.distance = distance;
-        this.assignedSpaceShip = assignedSpaceShip;
-        this.assignedCrew = assignedCrew;
+        this.assignedSpaceShip = assignedSpaceShip; // delete
+        this.assignedCrew = assignedCrew; // delete
         this.missionResult = missionResult;
     }
 
