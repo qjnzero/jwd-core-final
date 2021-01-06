@@ -8,6 +8,8 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 // do the same for other entities
 public class CrewMemberFactory implements EntityFactory<CrewMember> {
 
+    // todo: MY_COMMENT: redo
+
     @Override
     public CrewMember create(Object... args) {
         return new CrewMember((String) args[0],
