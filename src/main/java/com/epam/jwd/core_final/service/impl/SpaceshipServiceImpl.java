@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SpaceshipServiceImpl implements SpaceshipService {
 
@@ -31,12 +32,12 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
     @Override
     public List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria) {
-        return null;
+        return spaceships.stream().filter(criteria::matches).collect(Collectors.toList());
     }
 
     @Override
     public Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria) {
-        return Optional.empty();
+        return spaceships.stream().filter(criteria::matches).findFirst();
     }
 
     @Override
