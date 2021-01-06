@@ -10,9 +10,9 @@ public interface MissionService {
 
     List<FlightMission> findAllMissions();
 
-    List<FlightMission> findAllMissionsByCriteria(Criteria<? extends FlightMission> criteria);
+    List<FlightMission> findAllMissionsByCriteria(Criteria<FlightMission> criteria); // changed signature
 
-    Optional<FlightMission> findMissionByCriteria(Criteria<? extends FlightMission> criteria);
+    Optional<FlightMission> findMissionByCriteria(Criteria<FlightMission> criteria); // changed signature
 
     FlightMission updateSpaceshipDetails(FlightMission flightMission);
 
