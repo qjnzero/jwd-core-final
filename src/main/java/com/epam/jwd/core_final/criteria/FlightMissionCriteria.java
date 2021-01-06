@@ -1,28 +1,61 @@
 package com.epam.jwd.core_final.criteria;
 
+import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
-import com.epam.jwd.core_final.domain.Rank;
-import com.epam.jwd.core_final.domain.Role;
+import com.epam.jwd.core_final.domain.MissionResult;
+import com.epam.jwd.core_final.domain.Spaceship;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Should be a builder for {@link com.epam.jwd.core_final.domain.FlightMission} fields
  */
 public class FlightMissionCriteria extends Criteria<FlightMission> {
 
-    // todo: MY_COMMENT: redo
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final Long distance;
+    private final Spaceship assignedSpaceship;
+    private final List<CrewMember> assignedCrew;
+    private final MissionResult missionResult;
 
     public static class Builder extends Criteria.Builder<Builder> {
 
-        private Role role;
-        private Rank rank;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private Long distance;
+        private Spaceship assignedSpaceship;
+        private List<CrewMember> assignedCrew;
+        private MissionResult missionResult;
 
-        public Builder withRole(Role role) {
-            this.role = role;
+        public Builder withStartDate(LocalDate startDate) {
+            this.startDate = startDate;
             return self();
         }
 
-        public Builder withRank(Rank rank) {
-            this.rank = rank;
+        public Builder withEndDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return self();
+        }
+
+        public Builder withDistance(Long distance) {
+            this.distance = distance;
+            return self();
+        }
+
+        public Builder withAssignedSpaceship(Spaceship assignedSpaceship) {
+            this.assignedSpaceship = assignedSpaceship;
+            return self();
+        }
+
+        public Builder withAssignedCrew(List<CrewMember> assignedCrew) {
+            this.assignedCrew = assignedCrew;
+            return self();
+        }
+
+        public Builder withMissionResult(MissionResult missionResult) {
+            this.missionResult = missionResult;
             return self();
         }
 
@@ -39,5 +72,11 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
 
     public FlightMissionCriteria(Builder builder) {
         super(builder);
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
+        this.distance = builder.distance;
+        this.assignedSpaceship = builder.assignedSpaceship;
+        this.assignedCrew = builder.assignedCrew;
+        this.missionResult = builder.missionResult;
     }
 }
