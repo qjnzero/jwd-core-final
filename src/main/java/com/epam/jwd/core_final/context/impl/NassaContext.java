@@ -46,14 +46,14 @@ public class NassaContext implements ApplicationContext {
 
     @Override
     public void init() throws InvalidStateException {
-        try {
+//        try {
             readCrewResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getCrewFileName());
             readSpaceshipResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getSpaceshipsFileName());
-        } catch (Exception e) {
-            throw new InvalidStateException();
-        }
+//        } catch (Exception e) {
+//            throw new InvalidStateException();
+//        }
     }
 
     private void readCrewResourcesFrom(String filePath) {
