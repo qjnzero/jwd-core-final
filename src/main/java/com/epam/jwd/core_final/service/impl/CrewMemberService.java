@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CrewMemberService implements CrewService {
 
@@ -32,12 +33,12 @@ public class CrewMemberService implements CrewService {
 
     @Override
     public List<CrewMember> findAllCrewMembersByCriteria(Criteria<CrewMember> criteria) {
-        return null;
+        return crewMembers.stream().filter(criteria::matches).collect(Collectors.toList());
     }
 
     @Override
     public Optional<CrewMember> findCrewMemberByCriteria(Criteria<CrewMember> criteria) {
-        return Optional.empty();
+        return crewMembers.stream().filter(criteria::matches).findFirst();
     }
 
     @Override
