@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Spaceship;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,4 +80,32 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
         this.assignedCrew = builder.assignedCrew;
         this.missionResult = builder.missionResult;
     }
+
+    @Override
+    public boolean matches(FlightMission baseEntity) {
+        List<Boolean> checkedCriteria = new ArrayList<>();
+        if (startDate != null) {
+            checkedCriteria.add(startDate.equals(baseEntity.getStartDate()));
+        }
+        if (endDate != null) {
+            checkedCriteria.add(endDate.equals(baseEntity.getEndDate()));
+        }
+        if (distance != null) {
+            checkedCriteria.add(distance.equals(baseEntity.getDistance()));
+        }
+        if (assignedSpaceship != null) {
+            checkedCriteria.add(assignedSpaceship.equals(baseEntity.getAssignedSpaceShip()));
+        }
+        if (assignedCrew != null) {
+            checkedCriteria.add(assignedCrew.equals(baseEntity.getAssignedCrew()));
+        }
+        if (missionResult != null) {
+            checkedCriteria.add(missionResult.equals(baseEntity.getMissionResult()));
+        }
+        if (checkedCriteria.isEmpty()) {
+            return false;
+        }
+        return checkedCriteria.stream().filter(b -> !b).findFirst().orElse(true);
+    }
+
 }
