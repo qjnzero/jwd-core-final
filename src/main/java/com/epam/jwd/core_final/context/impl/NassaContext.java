@@ -4,6 +4,7 @@ import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.domain.ApplicationProperties;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
+import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.populator.Populator;
@@ -27,6 +28,7 @@ public class NassaContext implements ApplicationContext {
     // no getters/setters for them
     private Collection<CrewMember> crewMembers = new ArrayList<>();
     private Collection<Spaceship> spaceships = new ArrayList<>();
+    private Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
     public <T extends BaseEntity> Collection<? extends BaseEntity> retrieveBaseEntityList(Class<T> tClass) {
@@ -34,6 +36,8 @@ public class NassaContext implements ApplicationContext {
             return crewMembers;
         } else if (tClass.equals(Spaceship.class) && spaceships != null) {
             return spaceships;
+        } else if (tClass.equals(FlightMission.class) && flightMissions != null) {
+            return flightMissions;
         } else {
             return Collections.emptyList();
         }
@@ -46,14 +50,14 @@ public class NassaContext implements ApplicationContext {
 
     @Override
     public void init() throws InvalidStateException {
-//        try {
+        try {
             readCrewResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getCrewFileName());
             readSpaceshipResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getSpaceshipsFileName());
-//        } catch (Exception e) {
-//            throw new InvalidStateException();
-//        }
+        } catch (Exception e) {
+            throw new InvalidStateException();
+        }
     }
 
     private void readCrewResourcesFrom(String filePath) {
