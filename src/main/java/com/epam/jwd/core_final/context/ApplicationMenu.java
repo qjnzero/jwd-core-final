@@ -6,14 +6,19 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.util.ConsolePrinterUtil;
+import com.epam.jwd.core_final.util.ConsoleReaderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readCrewMemberCriteria;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readFlightMission;
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readFlightMissionCriteria;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readInt;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printCollectionToConsole;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readSpaceshipCriteria;
 
 // todo replace Object with your own types
 @FunctionalInterface
