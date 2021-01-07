@@ -45,7 +45,7 @@ public final class UpdaterUtil {
         if (!flightMission.isPresent()) {
 //            throw new UnknownEntityException(); // todo: MY_COMMENT: redo this method
         }
-        flightMissionService.updateSpaceshipDetails(flightMission.get());
+        flightMissionService.updateFlightMissionDetails(flightMission.get());
     }
 
 }

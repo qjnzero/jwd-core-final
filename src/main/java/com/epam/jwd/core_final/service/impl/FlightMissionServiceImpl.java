@@ -42,7 +42,7 @@ public class FlightMissionServiceImpl implements MissionService {
     }
 
     @Override
-    public FlightMission updateSpaceshipDetails(FlightMission flightMission) {
+    public FlightMission updateFlightMissionDetails(FlightMission flightMission) {
         flightMission.setEndDate(flightMission.getStartDate().plusDays(12).plusMonths(1).plusYears(10));
         return flightMission;
     }
