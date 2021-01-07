@@ -11,12 +11,11 @@ public class StartMenu implements ApplicationMenu {
     }
 
     @Override
-    public Object printAvailableOptions() {
+    public String printAvailableOptions() {
         return null;
     }
 
     @Override
-    public Object handleUserInput(Object o) {
-        return null;
+    public void handleUserInput(int input) {
     }
 }
