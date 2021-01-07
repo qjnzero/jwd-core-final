@@ -10,11 +10,11 @@ import java.util.zip.InflaterInputStream;
 
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
 
-public final class ConsoleInputerUtil {
+public final class ConsoleReaderUtil {
 
     private static final Scanner SCANNER = new Scanner(new InflaterInputStream(System.in));
 
-    private ConsoleInputerUtil() {
+    private ConsoleReaderUtil() {
     }
 
     public static int readInt(String msg) {

@@ -6,13 +6,12 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
-import com.epam.jwd.core_final.util.ConsoleInputerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jwd.core_final.util.ConsoleInputerUtil.readFlightMission;
-import static com.epam.jwd.core_final.util.ConsoleInputerUtil.readInt;
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readFlightMission;
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readInt;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printCollectionToConsole;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
 
