@@ -49,8 +49,9 @@ public class FlightMissionServiceImpl implements MissionService {
 
     @Override
     public FlightMission createMission(FlightMission flightMission) {
-        flightMissionEntityFactory.create(flightMission.getStartDate(), flightMission.getStartDate(),
+        return flightMissionEntityFactory.create(flightMission.getStartDate(), flightMission.getStartDate(),
                 flightMission.getDistance(), flightMission.getAssignedSpaceShip(),
                 flightMission.getAssignedCrew(), flightMission.getMissionResult());
+
     }
 }
