@@ -19,6 +19,9 @@ import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readInt;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printCollectionToConsole;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readSpaceshipCriteria;
+import static com.epam.jwd.core_final.util.UpdaterUtil.updateCrewMember;
+import static com.epam.jwd.core_final.util.UpdaterUtil.updateFlightMission;
+import static com.epam.jwd.core_final.util.UpdaterUtil.updateSpaceship;
 
 // todo replace Object with your own types
 @FunctionalInterface
@@ -55,16 +58,14 @@ public interface ApplicationMenu {
                 case 3:
                     List<CrewMember> crewMembers = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(CrewMember.class));
                     printCollectionToConsole(crewMembers);
-                    int chosenCrewMember = readInt("Choose crew member to update: ");
-                    CrewMemberCriteria criteriaCrewMember = readCrewMemberCriteria("Make up a criteria to update selected crew member: ");
-                    updateCrewMember(crewMembers.get(chosenCrewMember), criteriaCrewMember);
+                    CrewMemberCriteria criteriaCrewMember = readCrewMemberCriteria("Make up a criteria to update crew member: ");
+                    updateCrewMember(criteriaCrewMember);
                     break;
                 case 4:
                     List<Spaceship> spaceships = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(Spaceship.class));
                     printCollectionToConsole(spaceships);
-                    int chosenSpaceship = readInt("Choose spaceship to update: ");
-                    SpaceshipCriteria criteriaSpaceship = readSpaceshipCriteria("Make up a criteria to update selected spaceship: ");
-                    updateSpaceship(spaceships.get(chosenSpaceship), criteriaSpaceship);
+                    SpaceshipCriteria criteriaSpaceship = readSpaceshipCriteria("Make up a criteria to update spaceship: ");
+                    updateSpaceship(criteriaSpaceship);
                     break;
                 case 5:
                     readFlightMission("Enter mission information: ");
@@ -72,9 +73,8 @@ public interface ApplicationMenu {
                 case 6:
                     List<FlightMission> flightMissions = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
                     printCollectionToConsole(flightMissions);
-                    int chosenFlightMission = readInt("Choose flight mission to update: ");
-                    FlightMissionCriteria criteria = readFlightMissionCriteria("Make up a criteria to update selected flight mission: ");
-                    updateFlightMission(flightMissions.get(chosenFlightMission), criteria);
+                    FlightMissionCriteria flightMissionCriteria = readFlightMissionCriteria("Make up a criteria to update flight mission: ");
+                    updateFlightMission(flightMissionCriteria);
                     break;
                 case 7:
                     printCollectionToConsole(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
