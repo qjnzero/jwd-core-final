@@ -22,7 +22,7 @@ public class CrewMemberService implements CrewService {
     private final EntityFactory<CrewMember> crewMemberFactory;
 
     public CrewMemberService(CrewMemberFactory crewMemberFactory) {
-        crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class); // redo
+        crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class); // todo: MY_COMMENT: redo this method
         this.crewMemberFactory = crewMemberFactory;
     }
 
@@ -49,12 +49,11 @@ public class CrewMemberService implements CrewService {
 
     @Override
     public void assignCrewMemberOnMission(CrewMember crewMember) throws RuntimeException {
-        crewMember.setReadyForNextMissions(true); // redo
+        crewMember.setReadyForNextMissions(true); // todo: MY_COMMENT: redo this method
     }
 
     @Override
     public CrewMember createCrewMember(CrewMember crewMember) throws RuntimeException {
-//        return crewMemberFactory.create(crewMember);
-        return null; // how to create crewMember from crewMember
+        return crewMemberFactory.create(crewMember.getName(), crewMember.getRole(), crewMember.getRank());
     }
 }
