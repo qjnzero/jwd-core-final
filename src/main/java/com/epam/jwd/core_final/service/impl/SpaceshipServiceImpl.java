@@ -21,7 +21,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
     private final EntityFactory<Spaceship> spaceshipFactory;
 
     public SpaceshipServiceImpl(SpaceshipFactory spaceshipFactory) {
-        spaceships = (Collection<Spaceship>) NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class);
+        spaceships = (Collection<Spaceship>) NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class); // todo: MY_COMMENT: redo this method
         this.spaceshipFactory = spaceshipFactory;
     }
 
@@ -48,11 +48,11 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
     @Override
     public void assignSpaceshipOnMission(Spaceship spaceship) throws RuntimeException {
-        spaceship.setReadyForNextMissions(true); // redo
+        spaceship.setReadyForNextMissions(true); // todo: MY_COMMENT: redo this method
     }
 
     @Override
     public Spaceship createSpaceship(Spaceship spaceship) throws RuntimeException {
-        return null;
+        return spaceshipFactory.create(spaceship.getName(), spaceship.getCrew(), spaceship.getFlightDistance());
     }
 }
