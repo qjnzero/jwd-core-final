@@ -84,7 +84,7 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
     @Override
     public boolean matches(FlightMission baseEntity) {
         List<Boolean> checkedCriteria = new ArrayList<>();
-        checkedCriteria.add(this.matches(baseEntity));
+        checkedCriteria.add(super.matches(baseEntity));
         if (startDate != null) {
             checkedCriteria.add(startDate.equals(baseEntity.getStartDate()));
         }
