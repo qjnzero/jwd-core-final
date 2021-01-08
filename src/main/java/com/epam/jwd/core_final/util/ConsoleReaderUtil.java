@@ -52,7 +52,8 @@ public final class ConsoleReaderUtil {
 
     public static String readLine(String msg) {
         printMsgToConsole(msg);
-        SCANNER.next();
+
+        SCANNER.nextLine();
         return SCANNER.nextLine();
     }
 
