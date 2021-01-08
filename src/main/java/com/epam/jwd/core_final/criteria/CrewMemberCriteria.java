@@ -60,6 +60,7 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
     @Override
     public boolean matches(CrewMember baseEntity) {
         List<Boolean> checkedCriteria = new ArrayList<>();
+        checkedCriteria.add(super.matches(baseEntity));
         if (role != null) {
             checkedCriteria.add(role.equals(baseEntity.getRole()));
         }
