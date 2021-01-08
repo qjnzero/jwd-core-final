@@ -5,6 +5,7 @@ import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
+import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.MissionService;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public enum DefaultMissionService implements MissionService {
@@ -42,7 +44,8 @@ public enum DefaultMissionService implements MissionService {
 
     @Override
     public FlightMission updateFlightMissionDetails(FlightMission flightMission) {
-        flightMission.setEndDate(flightMission.getStartDate().plusDays(13).plusMonths(13).plusYears(13));
+        Random random = new Random();
+        flightMission.setMissionResult(MissionResult.resolveMissionResultById(random.nextInt(5) + 1));
         return flightMission;
     }
 
