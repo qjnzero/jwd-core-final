@@ -52,7 +52,7 @@ public final class ConsoleReaderUtil {
 
     public static String readLine(String msg) {
         printMsgToConsole(msg);
-
+        SCANNER.next();
         return SCANNER.nextLine();
     }
 
@@ -81,10 +81,10 @@ public final class ConsoleReaderUtil {
         printMsgToConsole(msg);
 
         System.out.println("Choose rank: ");
-        System.out.println("0. " + Rank.TRAINEE);
-        System.out.println("1. " + Rank.SECOND_OFFICER);
-        System.out.println("2. " + Rank.FIRST_OFFICER);
-        System.out.println("3. " + Rank.CAPTAIN);
+        System.out.println("1. " + Rank.TRAINEE);
+        System.out.println("2. " + Rank.SECOND_OFFICER);
+        System.out.println("3. " + Rank.FIRST_OFFICER);
+        System.out.println("4. " + Rank.CAPTAIN);
 
         return Rank.resolveRankById(SCANNER.nextInt());
     }
