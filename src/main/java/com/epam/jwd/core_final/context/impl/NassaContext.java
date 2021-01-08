@@ -71,12 +71,12 @@ public class NassaContext implements ApplicationContext {
     }
 
     private void readCrewResourcesFrom(String filePath) {
-        Populator<CrewMember> crewPopulator = new CrewPopulator();
+        Populator<CrewMember> crewPopulator = CrewPopulator.INSTANCE;
         crewMembers = crewPopulator.populateFromResources(filePath);
     }
 
     private void readSpaceshipResourcesFrom(String filePath) {
-        Populator<Spaceship> spaceshipPopulator = new SpaceshipPopulator();
+        Populator<Spaceship> spaceshipPopulator = SpaceshipPopulator.INSTANCE;
         spaceships = spaceshipPopulator.populateFromResources(filePath);
     }
 
