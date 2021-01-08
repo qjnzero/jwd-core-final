@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SpaceshipsResourceReader implements ResourceReader {
+public enum SpaceshipsResourceReader implements ResourceReader {
+
+    INSTANCE;
 
     private static final char SHARP = '#';
     private static final char SEMICOLON = ';';
