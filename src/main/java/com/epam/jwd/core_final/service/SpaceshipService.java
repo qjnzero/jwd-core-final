@@ -14,14 +14,14 @@ public interface SpaceshipService {
 
     List<Spaceship> findAllSpaceships();
 
-    List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria); // changed signature
+    List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria);
 
-    Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria); // changed signature
+    Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria);
 
     Spaceship updateSpaceshipDetails(Spaceship spaceship);
 
     // todo create custom exception for case, when spaceship is not able to be assigned
-    void assignSpaceshipOnMission(Spaceship crewMember) throws RuntimeException;
+    void assignSpaceshipOnMission(Spaceship spaceship) throws RuntimeException;
 
     // todo create custom exception for case, when crewMember is not able to be created (for example - duplicate.
     // spaceship unique criteria - only name!

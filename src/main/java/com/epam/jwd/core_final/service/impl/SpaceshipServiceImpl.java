@@ -3,13 +3,15 @@ package com.epam.jwd.core_final.service.impl;
 import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
+import com.epam.jwd.core_final.domain.FlightMission;
+import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.SpaceshipService;
+import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,27 +19,29 @@ import java.util.stream.Collectors;
 public class SpaceshipServiceImpl implements SpaceshipService {
 
     private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
-    private final Collection<Spaceship> spaceships;
     private final EntityFactory<Spaceship> spaceshipFactory;
 
     public SpaceshipServiceImpl(SpaceshipFactory spaceshipFactory) {
-        spaceships = (Collection<Spaceship>) NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class); // todo: MY_COMMENT: redo this method
         this.spaceshipFactory = spaceshipFactory;
     }
 
     @Override
     public List<Spaceship> findAllSpaceships() {
-        return new ArrayList<>(spaceships);
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class)));
     }
 
     @Override
     public List<Spaceship> findAllSpaceshipsByCriteria(Criteria<Spaceship> criteria) {
-        return spaceships.stream().filter(criteria::matches).collect(Collectors.toList());
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class))).stream()
+                .filter(criteria::matches)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Spaceship> findSpaceshipByCriteria(Criteria<Spaceship> criteria) {
-        return spaceships.stream().filter(criteria::matches).findFirst();
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class))).stream()
+                .filter(criteria::matches)
+                .findFirst();
     }
 
     @Override
@@ -48,14 +52,23 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
     @Override
     public void assignSpaceshipOnMission(Spaceship spaceship) throws RuntimeException {
-        spaceship.setReadyForNextMissions(true); // todo: MY_COMMENT: redo this method
+        if (!spaceship.getReadyForNextMissions()) {
+            throw new InvalidStateException("Spaceship isn't ready for the next flight mission.");
+        }
+
+        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class))).stream()
+                .filter(mission -> mission.getMissionResult().equals(MissionResult.PLANNED))
+                .findFirst()
+                .orElseThrow(() -> new InvalidStateException("No available mission found"))
+                .setAssignedSpaceShip(spaceship);
     }
 
     @Override
     public Spaceship createSpaceship(Spaceship spaceship) throws RuntimeException {
         Spaceship newSpaceship = spaceshipFactory.create(
-                spaceship.getName(), spaceship.getCrew(), spaceship.getFlightDistance());
-        spaceships.add(newSpaceship);
+                spaceship.getName(),
+                spaceship.getCrew(),
+                spaceship.getFlightDistance());
         NassaContext.addEntityToStorage(newSpaceship, Spaceship.class);
         return newSpaceship;
     }
