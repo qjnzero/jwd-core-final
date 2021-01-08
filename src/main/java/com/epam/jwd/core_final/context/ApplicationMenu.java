@@ -38,7 +38,7 @@ public interface ApplicationMenu {
                 "1. Get crew members\n" +
                 "2. Get spaceships\n" +
                 "3. Update crew member\n" +
-                "4. Update spaceship" +
+                "4. Update spaceship\n" +
                 "5. Create mission\n" +
                 "6. Update mission\n" +
                 "7. Write to json file information about selected mission\n" +
