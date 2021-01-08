@@ -83,7 +83,9 @@ public class FlightMission extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "FlightMission{" +
-                "startDate=" + startDate +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", distance=" + distance +
                 ", assignedSpaceShip=" + assignedSpaceShip +

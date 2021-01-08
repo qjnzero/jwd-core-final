@@ -47,7 +47,9 @@ public class Spaceship extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "Spaceship{" +
-                "crew=" + crew +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
+                ", crew=" + crew +
                 ", flightDistance=" + flightDistance +
                 ", isReadyForNextMissions=" + isReadyForNextMissions +
                 '}';
