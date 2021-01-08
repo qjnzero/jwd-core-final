@@ -4,41 +4,48 @@ import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
+import com.epam.jwd.core_final.domain.FlightMission;
+import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Rank;
+import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.exception.DuplicateEntityException;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
+import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.CrewService;
+import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DefaultCrewService implements CrewService {
+public enum DefaultCrewService implements CrewService {
 
-    private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
-    private final Collection<CrewMember> crewMembers;
-    private final EntityFactory<CrewMember> crewMemberFactory;
+    INSTANCE;
 
-    public DefaultCrewService(CrewMemberFactory crewMemberFactory) {
-        crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class); // todo: MY_COMMENT: redo this method
-        this.crewMemberFactory = crewMemberFactory;
-    }
+    private final ApplicationContext NASSA_CONTEXT = new NassaContext();
 
     @Override
     public List<CrewMember> findAllCrewMembers() {
-        return new ArrayList<>(crewMembers);
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class)));
     }
 
     @Override
     public List<CrewMember> findAllCrewMembersByCriteria(Criteria<CrewMember> criteria) {
-        return crewMembers.stream().filter(criteria::matches).collect(Collectors.toList());
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class))).stream()
+                .filter(criteria::matches)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<CrewMember> findCrewMemberByCriteria(Criteria<CrewMember> criteria) {
-        return crewMembers.stream().filter(criteria::matches).findFirst();
+        return new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class))).stream()
+                .filter(criteria::matches)
+                .findFirst();
     }
 
     @Override
@@ -48,14 +55,31 @@ public class DefaultCrewService implements CrewService {
     }
 
     @Override
-    public void assignCrewMemberOnMission(CrewMember crewMember) throws RuntimeException {
-        crewMember.setReadyForNextMissions(true); // todo: MY_COMMENT: redo this method
+    public void assignCrewMemberOnMission(CrewMember crewMember) throws InvalidStateException {
+        if (!crewMember.getReadyForNextMissions()) {
+            throw new InvalidStateException("Crew member isn't ready for the next flight mission.");
+        }
+
+        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class))).stream()
+                .filter(mission -> mission.getMissionResult().equals(MissionResult.PLANNED))
+                .findFirst()
+                .orElseThrow(() -> new InvalidStateException("No available mission found"))
+                .setAssignedCrew(Collections.singletonList(crewMember)); // todo: REDO
     }
 
     @Override
-    public CrewMember createCrewMember(CrewMember crewMember) throws RuntimeException {
-        CrewMember newCrewMember = crewMemberFactory.create(crewMember.getName(), crewMember.getRole(), crewMember.getRank());
-        crewMembers.add(newCrewMember);
+    public CrewMember createCrewMember(CrewMember crewMember) throws DuplicateEntityException {
+        Optional<CrewMember> duplicate = new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class))).stream()
+                .filter(c -> c.equals(crewMember))
+                .findAny();
+        if (duplicate.isPresent()) {
+            throw new DuplicateEntityException("Such a crew member has already been created.");
+        }
+
+        CrewMember newCrewMember = CrewMemberFactory.INSTANCE.create(
+                crewMember.getName(),
+                crewMember.getRole(),
+                crewMember.getRank());
         NassaContext.addEntityToStorage(newCrewMember, CrewMember.class);
         return newCrewMember;
     }
