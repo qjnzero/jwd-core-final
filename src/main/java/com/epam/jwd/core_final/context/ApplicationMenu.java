@@ -48,23 +48,24 @@ public interface ApplicationMenu {
     default void handleUserInput(int input) {
 
         printMsgToConsole(this.printAvailableOptions());
-
+        List<CrewMember> crewMembers = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(CrewMember.class));
+        List<Spaceship> spaceships = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(Spaceship.class));
+        List<FlightMission> flightMissions = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
         try {
             switch (input) {
                 case 1:
-                    printCollectionToConsole(this.getApplicationContext().retrieveBaseEntityList(CrewMember.class));
+                    printCollectionToConsole(crewMembers); // !!!!without diamond brackets!!!!
                     break;
                 case 2:
-                    printCollectionToConsole(this.getApplicationContext().retrieveBaseEntityList(Spaceship.class));
+                    printCollectionToConsole(spaceships);
                     break;
                 case 3:
-                    List<CrewMember> crewMembers = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(CrewMember.class));
                     printCollectionToConsole(crewMembers);
                     CrewMemberCriteria criteriaCrewMember = readCrewMemberCriteria("Make up a criteria to update crew member: ");
                     updateCrewMember(criteriaCrewMember);
                     break;
                 case 4:
-                    List<Spaceship> spaceships = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(Spaceship.class));
+
                     printCollectionToConsole(spaceships);
                     SpaceshipCriteria criteriaSpaceship = readSpaceshipCriteria("Make up a criteria to update spaceship: ");
                     updateSpaceship(criteriaSpaceship);
@@ -73,14 +74,13 @@ public interface ApplicationMenu {
                     readFlightMission("Enter mission information: ");
                     break;
                 case 6:
-                    List<FlightMission> flightMissions = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
+
                     printCollectionToConsole(flightMissions);
                     FlightMissionCriteria flightMissionCriteria = readFlightMissionCriteria("Make up a criteria to update flight mission: ");
                     updateFlightMission(flightMissionCriteria);
                     break;
                 case 7:
-                    List<FlightMission> flightMissionsCase7 = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
-                    printCollectionToConsole(flightMissionsCase7);
+                    printCollectionToConsole(flightMissions);
                     FlightMissionCriteria flightMissionCriteriaCase7 = readFlightMissionCriteria("Make up a criteria to update flight mission: ");
                     writeToJsonFile(flightMissionCriteriaCase7, NassaContext.OUTPUT_FILE_PATH);
                     break;

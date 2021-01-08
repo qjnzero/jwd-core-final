@@ -29,8 +29,8 @@ public class NassaContext implements ApplicationContext {
     }
 
     // no getters/setters for them
-    private Collection<CrewMember> crewMembers = new ArrayList<>();
-    private Collection<Spaceship> spaceships = new ArrayList<>();
+    private static Collection<CrewMember> crewMembers = new ArrayList<>();
+    private static Collection<Spaceship> spaceships = new ArrayList<>();
     private Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
