@@ -6,7 +6,9 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 
 import java.time.LocalDate;
 
-public class FlightMissionFactory implements EntityFactory<FlightMission> {
+public enum FlightMissionFactory implements EntityFactory<FlightMission> {
+
+    INSTANCE;
 
     @Override
     public FlightMission create(Object... args) {

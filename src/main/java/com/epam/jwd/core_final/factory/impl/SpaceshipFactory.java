@@ -6,7 +6,9 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 
 import java.util.Map;
 
-public class SpaceshipFactory implements EntityFactory<Spaceship> {
+public enum SpaceshipFactory implements EntityFactory<Spaceship> {
+
+    INSTANCE;
 
     @Override
     public Spaceship create(Object... args) {

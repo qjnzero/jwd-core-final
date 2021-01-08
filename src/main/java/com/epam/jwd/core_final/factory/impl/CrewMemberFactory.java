@@ -6,7 +6,9 @@ import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.factory.EntityFactory;
 
 // do the same for other entities
-public class CrewMemberFactory implements EntityFactory<CrewMember> {
+public enum CrewMemberFactory implements EntityFactory<CrewMember> {
+
+    INSTANCE;
 
     @Override
     public CrewMember create(Object... args) {
