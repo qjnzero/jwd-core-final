@@ -7,6 +7,7 @@ import com.epam.jwd.core_final.service.impl.DefaultMissionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 
 public final class JsonWriterUtil {
@@ -14,18 +15,11 @@ public final class JsonWriterUtil {
     private JsonWriterUtil() {
     }
 
-    public static void writeToJsonFile(FlightMissionCriteria flightMissionCriteria, String filePath) {
-        DefaultMissionService flightMissionService = new DefaultMissionService(new FlightMissionFactory());
-        Optional<FlightMission> flightMission = flightMissionService.findMissionByCriteria(flightMissionCriteria);
-        if (!flightMission.isPresent()) {
-//            throw new UnknownEntityException(); // todo: MY_COMMENT: redo this method
-        }
-        flightMissionService.updateFlightMissionDetails(flightMission.get());
-
+    public static void writeToJsonFile(List<FlightMission> flightMissions, String filePath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            mapper.writeValue(new File(filePath), flightMission);
+            mapper.writeValue(new File(filePath), flightMissions);
 
         } catch (Exception ex) {
             ex.printStackTrace();
