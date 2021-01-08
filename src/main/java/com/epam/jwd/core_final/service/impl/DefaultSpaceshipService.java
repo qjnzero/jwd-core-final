@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.exception.DuplicateEntityException;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.SpaceshipService;
 import sun.plugin.dom.exception.InvalidStateException;
@@ -47,7 +48,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
     }
 
     @Override
-    public void assignSpaceshipOnMission(Spaceship spaceship) throws RuntimeException {
+    public void assignSpaceshipOnMission(Spaceship spaceship) throws InvalidStateException {
         if (!spaceship.getReadyForNextMissions()) {
             throw new InvalidStateException("Spaceship isn't ready for the next flight mission.");
         }
@@ -60,12 +61,12 @@ public enum DefaultSpaceshipService implements SpaceshipService {
     }
 
     @Override
-    public Spaceship createSpaceship(Spaceship spaceship) throws RuntimeException {
+    public Spaceship createSpaceship(Spaceship spaceship) throws DuplicateEntityException {
         Optional<Spaceship> duplicate = new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class))).stream()
                 .filter(s -> s.equals(spaceship))
                 .findAny();
         if (duplicate.isPresent()) {
-            throw new InvalidStateException("Such a spaceship has already been created.");
+            throw new DuplicateEntityException("Such a spaceship has already been created.");
         }
 
         Spaceship newSpaceship = SpaceshipFactory.INSTANCE.create(
