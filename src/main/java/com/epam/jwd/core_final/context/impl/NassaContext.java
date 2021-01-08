@@ -31,7 +31,7 @@ public class NassaContext implements ApplicationContext {
     // no getters/setters for them
     private static Collection<CrewMember> crewMembers = new ArrayList<>();
     private static Collection<Spaceship> spaceships = new ArrayList<>();
-    private Collection<FlightMission> flightMissions = new ArrayList<>();
+    private static Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
     public <T extends BaseEntity> Collection<? extends BaseEntity> retrieveBaseEntityList(Class<T> tClass) {
@@ -71,5 +71,15 @@ public class NassaContext implements ApplicationContext {
     private void readSpaceshipResourcesFrom(String filePath) {
         Populator<Spaceship> spaceshipPopulator = new SpaceshipPopulator();
         spaceships = spaceshipPopulator.populateFromResources(filePath);
+    }
+
+    public static <T extends BaseEntity> void addEntityToStorage(T baseEntity, Class<T> tClass) {
+        if (tClass.equals(CrewMember.class)) {
+            crewMembers.add((CrewMember) baseEntity);
+        } else if (tClass.equals(Spaceship.class)) {
+             spaceships.add((Spaceship) baseEntity);
+        } else if (tClass.equals(FlightMission.class)) {
+             flightMissions.add((FlightMission) baseEntity);
+        }
     }
 }

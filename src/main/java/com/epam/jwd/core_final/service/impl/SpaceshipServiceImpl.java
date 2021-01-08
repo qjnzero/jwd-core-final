@@ -53,6 +53,10 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
     @Override
     public Spaceship createSpaceship(Spaceship spaceship) throws RuntimeException {
-        return spaceshipFactory.create(spaceship.getName(), spaceship.getCrew(), spaceship.getFlightDistance());
+        Spaceship newSpaceship = spaceshipFactory.create(
+                spaceship.getName(), spaceship.getCrew(), spaceship.getFlightDistance());
+        spaceships.add(newSpaceship);
+        NassaContext.addEntityToStorage(newSpaceship, Spaceship.class);
+        return newSpaceship;
     }
 }

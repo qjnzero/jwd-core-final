@@ -49,8 +49,12 @@ public class FlightMissionServiceImpl implements MissionService {
 
     @Override
     public FlightMission createMission(FlightMission flightMission) {
-        return flightMissionEntityFactory.create(flightMission.getStartDate(), flightMission.getStartDate(), // todo: MY_COMMENT: redo this method
+        FlightMission newFlightMission = flightMissionEntityFactory.create(
+                flightMission.getStartDate(), flightMission.getStartDate(), // todo: MY_COMMENT: redo this method
                 flightMission.getDistance(), flightMission.getAssignedSpaceShip(),
                 flightMission.getAssignedCrew(), flightMission.getMissionResult());
+        flightMissions.add(newFlightMission);
+        NassaContext.addEntityToStorage(newFlightMission, FlightMission.class);
+        return newFlightMission;
     }
 }

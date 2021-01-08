@@ -54,6 +54,9 @@ public class CrewMemberService implements CrewService {
 
     @Override
     public CrewMember createCrewMember(CrewMember crewMember) throws RuntimeException {
-        return crewMemberFactory.create(crewMember.getName(), crewMember.getRole(), crewMember.getRank());
+        CrewMember newCrewMember = crewMemberFactory.create(crewMember.getName(), crewMember.getRole(), crewMember.getRank());
+        crewMembers.add(newCrewMember);
+        NassaContext.addEntityToStorage(newCrewMember, CrewMember.class);
+        return newCrewMember;
     }
 }
