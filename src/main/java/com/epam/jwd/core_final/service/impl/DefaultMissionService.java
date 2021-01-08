@@ -15,45 +15,42 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DefaultMissionService implements MissionService {
+public enum DefaultMissionService implements MissionService {
+
+    INSTANCE;
 
     private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
-    private final Collection<FlightMission> flightMissions;
-    private final EntityFactory<FlightMission> flightMissionEntityFactory;
-
-    public DefaultMissionService(FlightMissionFactory flightMissionEntityFactory) {
-        this.flightMissions = (Collection<FlightMission>) NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class);  // todo: MY_COMMENT: redo this method
-        this.flightMissionEntityFactory = flightMissionEntityFactory;
-    }
 
     @Override
     public List<FlightMission> findAllMissions() {
-        return new ArrayList<>(flightMissions);
+        return new ArrayList<>(NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class));
     }
 
     @Override
     public List<FlightMission> findAllMissionsByCriteria(Criteria<FlightMission> criteria) {
-        return flightMissions.stream().filter(criteria::matches).collect(Collectors.toList());
+        return new ArrayList<>(NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class)).stream()
+                .filter(criteria::matches)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<FlightMission> findMissionByCriteria(Criteria<FlightMission> criteria) {
-        return flightMissions.stream().filter(criteria::matches).findFirst();
+        return new ArrayList<>(NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class)).stream()
+                .filter(criteria::matches)
+                .findFirst();
     }
 
     @Override
     public FlightMission updateFlightMissionDetails(FlightMission flightMission) {
-        flightMission.setEndDate(flightMission.getStartDate().plusDays(12).plusMonths(1).plusYears(10));
+        flightMission.setEndDate(flightMission.getStartDate().plusDays(13).plusMonths(13).plusYears(13));
         return flightMission;
     }
 
     @Override
     public FlightMission createMission(FlightMission flightMission) {
-        FlightMission newFlightMission = flightMissionEntityFactory.create(
-                flightMission.getStartDate(), flightMission.getStartDate(), // todo: MY_COMMENT: redo this method
-                flightMission.getDistance(), flightMission.getAssignedSpaceShip(),
-                flightMission.getAssignedCrew(), flightMission.getMissionResult());
-        flightMissions.add(newFlightMission);
+        FlightMission newFlightMission = FlightMissionFactory.INSTANCE.create(
+                flightMission.getStartDate(), flightMission.getStartDate(),
+                flightMission.getDistance(), flightMission.getMissionResult());
         NassaContext.addEntityToStorage(newFlightMission, FlightMission.class);
         return newFlightMission;
     }
