@@ -20,9 +20,12 @@ import java.util.Collections;
 public class NassaContext implements ApplicationContext {
 
     private static final ApplicationProperties applicationProperties;
+    public static final String OUTPUT_FILE_PATH;
 
     static {
         applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
+        OUTPUT_FILE_PATH = "src/main/resources/" + applicationProperties.getOutputRootDir() + "/" +
+                applicationProperties.getMissionsFileName();
     }
 
     // no getters/setters for them

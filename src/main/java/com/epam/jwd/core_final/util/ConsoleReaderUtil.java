@@ -27,7 +27,7 @@ import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
 
 public final class ConsoleReaderUtil {
 
-    private static final Scanner SCANNER = new Scanner(new InflaterInputStream(System.in));
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private ConsoleReaderUtil() {
     }

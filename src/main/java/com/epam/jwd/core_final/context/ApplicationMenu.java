@@ -1,5 +1,6 @@
 package com.epam.jwd.core_final.context;
 
+import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
 import com.epam.jwd.core_final.criteria.FlightMissionCriteria;
 import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
@@ -19,6 +20,7 @@ import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readInt;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printCollectionToConsole;
 import static com.epam.jwd.core_final.util.ConsolePrinterUtil.printMsgToConsole;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readSpaceshipCriteria;
+import static com.epam.jwd.core_final.util.JsonWriterUtil.writeToJsonFile;
 import static com.epam.jwd.core_final.util.UpdaterUtil.updateCrewMember;
 import static com.epam.jwd.core_final.util.UpdaterUtil.updateFlightMission;
 import static com.epam.jwd.core_final.util.UpdaterUtil.updateSpaceship;
@@ -77,9 +79,10 @@ public interface ApplicationMenu {
                     updateFlightMission(flightMissionCriteria);
                     break;
                 case 7:
-                    printCollectionToConsole(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
-                    int missionNumber = readInt("Enter mission number: ");
-                    JsonWriterUtil.writeToJsonFile(missionNumber);
+                    List<FlightMission> flightMissionsCase7 = new ArrayList(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
+                    printCollectionToConsole(flightMissionsCase7);
+                    FlightMissionCriteria flightMissionCriteriaCase7 = readFlightMissionCriteria("Make up a criteria to update flight mission: ");
+                    writeToJsonFile(flightMissionCriteriaCase7, NassaContext.OUTPUT_FILE_PATH);
                     break;
                 case 8:
                     System.exit(0);
