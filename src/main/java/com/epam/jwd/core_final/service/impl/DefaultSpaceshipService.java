@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class SpaceshipServiceImpl implements SpaceshipService {
+public class DefaultSpaceshipService implements SpaceshipService {
 
     private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
     private final EntityFactory<Spaceship> spaceshipFactory;
 
-    public SpaceshipServiceImpl(SpaceshipFactory spaceshipFactory) {
+    public DefaultSpaceshipService(SpaceshipFactory spaceshipFactory) {
         this.spaceshipFactory = spaceshipFactory;
     }
 

@@ -8,9 +8,7 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
-import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
-import com.epam.jwd.core_final.service.impl.FlightMissionServiceImpl;
-import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
+import com.epam.jwd.core_final.service.impl.DefaultMissionService;
 import com.epam.jwd.core_final.util.ConsolePrinterUtil;
 import com.epam.jwd.core_final.util.ConsoleReaderUtil;
 
@@ -38,7 +36,7 @@ public interface ApplicationMenu {
     ApplicationContext getApplicationContext();
 
     default void createFlightMission(FlightMission flightMission) {
-        new FlightMissionServiceImpl(new FlightMissionFactory()).createMission(flightMission);
+        new DefaultMissionService(new FlightMissionFactory()).createMission(flightMission);
     }
 
     default String printAvailableOptions() {

@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FlightMissionServiceImpl implements MissionService {
+public class DefaultMissionService implements MissionService {
 
     private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
     private final Collection<FlightMission> flightMissions;
     private final EntityFactory<FlightMission> flightMissionEntityFactory;
 
-    public FlightMissionServiceImpl(FlightMissionFactory flightMissionEntityFactory) {
+    public DefaultMissionService(FlightMissionFactory flightMissionEntityFactory) {
         this.flightMissions = (Collection<FlightMission>) NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class);  // todo: MY_COMMENT: redo this method
         this.flightMissionEntityFactory = flightMissionEntityFactory;
     }

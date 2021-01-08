@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CrewMemberService implements CrewService {
+public class DefaultCrewService implements CrewService {
 
     private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
     private final Collection<CrewMember> crewMembers;
     private final EntityFactory<CrewMember> crewMemberFactory;
 
-    public CrewMemberService(CrewMemberFactory crewMemberFactory) {
+    public DefaultCrewService(CrewMemberFactory crewMemberFactory) {
         crewMembers = (Collection<CrewMember>) NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class); // todo: MY_COMMENT: redo this method
         this.crewMemberFactory = crewMemberFactory;
     }
