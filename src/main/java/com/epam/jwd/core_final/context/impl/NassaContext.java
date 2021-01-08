@@ -40,13 +40,13 @@ public class NassaContext implements ApplicationContext {
     private static Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
-    public <T extends BaseEntity> Collection<? extends BaseEntity> retrieveBaseEntityList(Class<T> tClass) {
+    public <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass) {
         if (tClass.equals(CrewMember.class) && crewMembers != null) {
-            return crewMembers;
+            return (Collection<T>) crewMembers;
         } else if (tClass.equals(Spaceship.class) && spaceships != null) {
-            return spaceships;
+            return (Collection<T>) spaceships;
         } else if (tClass.equals(FlightMission.class) && flightMissions != null) {
-            return flightMissions;
+            return (Collection<T>) flightMissions;
         } else {
             return Collections.emptyList();
         }
