@@ -15,14 +15,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpaceshipPopulator implements Populator<Spaceship> {
+public enum SpaceshipPopulator implements Populator<Spaceship> {
+
+    INSTANCE;
 
     private static final char COMMA = ',';
     private static final char COLON = ':';
 
     @Override
     public Collection<Spaceship> populateFromResources(String filePath) {
-        EntityFactory<Spaceship> spaceshipFactory = new SpaceshipFactory();
+        EntityFactory<Spaceship> spaceshipFactory = SpaceshipFactory.INSTANCE;
         List<Spaceship> spaceships = new ArrayList<>();
         SpaceshipsResourceReader reader = new SpaceshipsResourceReader();
         for (List<String> lines: reader.read(filePath)) {

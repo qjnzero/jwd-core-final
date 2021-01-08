@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CrewPopulator implements Populator<CrewMember> {
+public enum CrewPopulator implements Populator<CrewMember> {
+
+    INSTANCE;
 
     @Override
     public Collection<CrewMember> populateFromResources(String filePath) {
-        EntityFactory<CrewMember> crewMemberFactory = new CrewMemberFactory();
+        EntityFactory<CrewMember> crewMemberFactory = CrewMemberFactory.INSTANCE;
         List<CrewMember> crewMembers = new ArrayList<>();
         CrewResourceReader reader = new CrewResourceReader();
         for (List<String> lines : reader.read(filePath)) {
