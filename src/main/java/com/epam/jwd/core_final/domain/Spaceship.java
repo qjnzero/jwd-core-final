@@ -43,4 +43,13 @@ public class Spaceship extends AbstractBaseEntity {
     public void setReadyForNextMissions(Boolean readyForNextMissions) {
         isReadyForNextMissions = readyForNextMissions;
     }
+
+    @Override
+    public String toString() {
+        return "Spaceship{" +
+                "crew=" + crew +
+                ", flightDistance=" + flightDistance +
+                ", isReadyForNextMissions=" + isReadyForNextMissions +
+                '}';
+    }
 }
