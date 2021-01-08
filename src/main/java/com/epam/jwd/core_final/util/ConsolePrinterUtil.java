@@ -14,7 +14,7 @@ public final class ConsolePrinterUtil {
     public static void printCollectionToConsole(Collection<?> collection) {
         System.out.println("{ ");
         for (Object o : collection) {
-            System.out.println("[ " + o.toString() + " ]\n");
+            System.out.println("[ " + o.toString() + " ]");
         }
         System.out.println(" }");
     }
