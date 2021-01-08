@@ -68,7 +68,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
             throw new InvalidStateException("Such a spaceship has already been created.");
         }
 
-        Spaceship newSpaceship = new SpaceshipFactory().create(
+        Spaceship newSpaceship = SpaceshipFactory.INSTANCE.create(
                 spaceship.getName(),
                 spaceship.getCrew(),
                 spaceship.getFlightDistance());
