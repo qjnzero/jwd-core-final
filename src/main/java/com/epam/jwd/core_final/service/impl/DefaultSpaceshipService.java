@@ -53,11 +53,18 @@ public enum DefaultSpaceshipService implements SpaceshipService {
             throw new InvalidStateException("Spaceship isn't ready for the next flight mission.");
         }
 
-        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class))).stream()
+        FlightMission flightMission = new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class))).stream()
                 .filter(mission -> mission.getMissionResult().equals(MissionResult.PLANNED))
+                .filter(mission -> mission.getDistance() >= spaceship.getFlightDistance())
                 .findFirst()
-                .orElseThrow(() -> new InvalidStateException("No available mission found"))
-                .setAssignedSpaceShip(spaceship);
+                .orElseThrow(() -> new InvalidStateException("No available mission found"));
+
+        flightMission.setAssignedSpaceShip(spaceship);
+
+        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(Spaceship.class))).stream()
+                .filter(s -> s.equals(flightMission.getAssignedSpaceShip()))
+                .findFirst()
+                .ifPresent(s -> s.setReadyForNextMissions(false));
     }
 
     @Override
