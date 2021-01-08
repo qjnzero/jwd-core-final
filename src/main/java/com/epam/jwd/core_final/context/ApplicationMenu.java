@@ -7,6 +7,10 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
+import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
+import com.epam.jwd.core_final.service.impl.FlightMissionServiceImpl;
+import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
 import com.epam.jwd.core_final.util.ConsolePrinterUtil;
 import com.epam.jwd.core_final.util.ConsoleReaderUtil;
 
@@ -32,6 +36,10 @@ public interface ApplicationMenu {
     // todo: MY_COMMENT: add logger
 
     ApplicationContext getApplicationContext();
+
+    default void createFlightMission(FlightMission flightMission) {
+        new FlightMissionServiceImpl(new FlightMissionFactory()).createMission(flightMission);
+    }
 
     default String printAvailableOptions() {
         return "Menu:\n" +
@@ -71,7 +79,8 @@ public interface ApplicationMenu {
                     updateSpaceship(criteriaSpaceship);
                     break;
                 case 5:
-                    readFlightMission("Enter mission information: ");
+                    FlightMission flightMission = readFlightMission("Enter mission information: ");
+                    createFlightMission(flightMission);
                     break;
                 case 6:
 
@@ -95,6 +104,8 @@ public interface ApplicationMenu {
             // todo: MY_COMMENT: clean console
             this.printAvailableOptions();
         }
+
+
 
     }
 }

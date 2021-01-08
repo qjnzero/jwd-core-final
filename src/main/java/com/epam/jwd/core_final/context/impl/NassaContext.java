@@ -12,20 +12,26 @@ import com.epam.jwd.core_final.populator.impl.CrewPopulator;
 import com.epam.jwd.core_final.populator.impl.SpaceshipPopulator;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
+import static java.nio.file.Files.createDirectories;
 
 // todo
 public class NassaContext implements ApplicationContext {
 
     private static final ApplicationProperties applicationProperties;
     public static final String OUTPUT_FILE_PATH;
+    public static final String OUTPUT_FOLDER_PATH;
 
     static {
         applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
         OUTPUT_FILE_PATH = "src/main/resources/" + applicationProperties.getOutputRootDir() + "/" +
                 applicationProperties.getMissionsFileName();
+        OUTPUT_FOLDER_PATH = "src/main/resources/" + applicationProperties.getOutputRootDir();
     }
 
     // no getters/setters for them
@@ -58,6 +64,7 @@ public class NassaContext implements ApplicationContext {
                     applicationProperties.getCrewFileName());
             readSpaceshipResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
                     applicationProperties.getSpaceshipsFileName());
+            new File(OUTPUT_FOLDER_PATH).mkdir();
         } catch (Exception e) {
             throw new InvalidStateException();
         }
