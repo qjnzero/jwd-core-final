@@ -10,6 +10,9 @@ public class SpaceshipFactory implements EntityFactory<Spaceship> {
 
     @Override
     public Spaceship create(Object... args) {
-        return new Spaceship((String) args[0], (Map<Role, Short>) args[1], (Long) args[2]);
+        return new Spaceship(
+                (String) args[0],
+                (Map<Role, Short>) args[1],
+                (Long) args[2]);
     }
 }

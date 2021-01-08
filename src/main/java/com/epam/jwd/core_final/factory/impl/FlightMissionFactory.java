@@ -10,7 +10,8 @@ public class FlightMissionFactory implements EntityFactory<FlightMission> {
 
     @Override
     public FlightMission create(Object... args) {
-        return new FlightMission((String) args[0],
+        return new FlightMission(
+                (String) args[0],
                 (LocalDate) args[1],
                 (LocalDate) args[2],
                 (Long) args[3],
