@@ -58,6 +58,7 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
     @Override
     public boolean matches(Spaceship baseEntity) {
         List<Boolean> checkedCriteria = new ArrayList<>();
+        checkedCriteria.add(this.matches(baseEntity));
         if (crew != null) {
             checkedCriteria.add(crew.equals(baseEntity.getCrew()));
         }
