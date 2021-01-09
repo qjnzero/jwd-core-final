@@ -106,7 +106,10 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
         if (checkedCriteria.isEmpty()) {
             return false;
         }
-        return checkedCriteria.stream().filter(b -> !b).findFirst().orElse(true);
+        return checkedCriteria.stream()
+                .filter(b -> !b)
+                .findFirst()
+                .orElse(true);
     }
 
 }

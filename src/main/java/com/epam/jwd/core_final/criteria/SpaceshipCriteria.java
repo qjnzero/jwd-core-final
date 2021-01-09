@@ -71,6 +71,9 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         if (checkedCriteria.isEmpty()) {
             return false;
         }
-        return checkedCriteria.stream().filter(b -> !b).findFirst().orElse(true);
+        return checkedCriteria.stream()
+                .filter(b -> !b)
+                .findFirst()
+                .orElse(true);
     }
 }

@@ -50,7 +50,10 @@ public abstract class Criteria<B extends BaseEntity> implements CriteriaMatcher<
         if (checkedCriteria.isEmpty()) {
             return false;
         }
-        return checkedCriteria.stream().filter(b -> !b).findFirst().orElse(true);
+        return checkedCriteria.stream()
+                .filter(b -> !b)
+                .findFirst()
+                .orElse(true);
     }
 
 }

@@ -12,8 +12,6 @@ import java.util.List;
  */
 public class CrewMemberCriteria extends Criteria<CrewMember> {
 
-    // todo: MY_COMMENT: change list to set everywhere MAYBE
-
     private final Role role;
     private final Rank rank;
     private final Boolean isReadyForNextMissions;
@@ -73,6 +71,9 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
         if (checkedCriteria.isEmpty()) {
             return false;
         }
-        return checkedCriteria.stream().filter(b -> !b).findFirst().orElse(true);
+        return checkedCriteria.stream()
+                .filter(b -> !b)
+                .findFirst()
+                .orElse(true);
     }
 }
