@@ -5,7 +5,7 @@ import com.epam.jwd.core_final.exception.InvalidStateException;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             Application.start();
         } catch (InvalidStateException e) {
