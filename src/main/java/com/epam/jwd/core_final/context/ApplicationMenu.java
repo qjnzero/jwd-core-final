@@ -135,7 +135,5 @@ public interface ApplicationMenu {
             // todo: MY_COMMENT: clean console
             this.printAvailableOptions();
         }
-
-
     }
 }

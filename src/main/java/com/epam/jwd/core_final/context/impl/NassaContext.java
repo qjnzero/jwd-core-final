@@ -13,12 +13,9 @@ import com.epam.jwd.core_final.populator.impl.SpaceshipPopulator;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
-import static java.nio.file.Files.createDirectories;
 
 // todo
 public class NassaContext implements ApplicationContext {
@@ -54,6 +51,7 @@ public class NassaContext implements ApplicationContext {
 
     /**
      * You have to read input files, populate collections
+     *
      * @throws InvalidStateException
      */
 
@@ -84,9 +82,9 @@ public class NassaContext implements ApplicationContext {
         if (tClass.equals(CrewMember.class)) {
             crewMembers.add((CrewMember) baseEntity);
         } else if (tClass.equals(Spaceship.class)) {
-             spaceships.add((Spaceship) baseEntity);
+            spaceships.add((Spaceship) baseEntity);
         } else if (tClass.equals(FlightMission.class)) {
-             flightMissions.add((FlightMission) baseEntity);
+            flightMissions.add((FlightMission) baseEntity);
         }
     }
 }
