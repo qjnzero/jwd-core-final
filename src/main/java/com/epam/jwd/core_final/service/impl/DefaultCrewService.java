@@ -56,15 +56,11 @@ public enum DefaultCrewService implements CrewService {
 
     @Override
     public void assignCrewMemberOnMission(CrewMember crewMember) throws InvalidStateException {
-        if (!crewMember.getReadyForNextMissions()) {
-            throw new InvalidStateException("Crew member isn't ready for the next flight mission.");
-        }
-
-        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(FlightMission.class))).stream()
-                .filter(mission -> mission.getMissionResult().equals(MissionResult.PLANNED))
+        new ArrayList<>((NASSA_CONTEXT.retrieveBaseEntityList(CrewMember.class))).stream()
+                .filter(member -> member.equals(crewMember))
+                .filter(CrewMember::getReadyForNextMissions)
                 .findFirst()
-                .orElseThrow(() -> new InvalidStateException("No available mission found"))
-                .setAssignedCrew(Collections.singletonList(crewMember)); // todo: REDO
+                .orElseThrow(() -> new InvalidStateException("No available crew member was found to assign."));
     }
 
     @Override
