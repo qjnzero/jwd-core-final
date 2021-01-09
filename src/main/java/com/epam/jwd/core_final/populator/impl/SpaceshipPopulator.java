@@ -1,10 +1,8 @@
 package com.epam.jwd.core_final.populator.impl;
 
-import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.factory.EntityFactory;
-import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.populator.Populator;
 import com.epam.jwd.core_final.reader.impl.SpaceshipsResourceReader;
@@ -27,7 +25,7 @@ public enum SpaceshipPopulator implements Populator<Spaceship> {
         EntityFactory<Spaceship> spaceshipFactory = SpaceshipFactory.INSTANCE;
         List<Spaceship> spaceships = new ArrayList<>();
         SpaceshipsResourceReader reader = SpaceshipsResourceReader.INSTANCE;
-        for (List<String> lines: reader.read(filePath)) {
+        for (List<String> lines : reader.read(filePath)) {
             spaceships.add(spaceshipFactory.create(
                     lines.get(0),
                     mapperFromStringToMapRoleAndShort(lines.get(2)),
