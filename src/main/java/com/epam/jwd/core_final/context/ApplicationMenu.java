@@ -25,8 +25,6 @@ public interface ApplicationMenu {
 
     Scanner SCANNER = new Scanner(System.in);
 
-    // todo: MY_COMMENT: add logger
-
     ApplicationContext getApplicationContext();
 
     default String printAvailableOptions() {
@@ -43,17 +41,15 @@ public interface ApplicationMenu {
 
     default void handleUserInput(int input) {
 
-        System.out.println(this.printAvailableOptions());
-
         List<CrewMember> crewMembers = new ArrayList<>(this.getApplicationContext().retrieveBaseEntityList(CrewMember.class));
         List<Spaceship> spaceships = new ArrayList<>(this.getApplicationContext().retrieveBaseEntityList(Spaceship.class));
-        List<FlightMission> flightMissions = new ArrayList<>(this.getApplicationContext().retrieveBaseEntityList(FlightMission.class));
         try {
             switch (input) {
                 case 1:
                     System.out.println("{");
                     crewMembers.forEach(System.out::println);
                     System.out.println("}");
+                    System.out.println("");
                     break;
                 case 2:
                     System.out.println("{");
@@ -132,7 +128,7 @@ public interface ApplicationMenu {
                     break;
             }
         } catch (Throwable t) {
-            // todo: MY_COMMENT: clean console
+
             this.printAvailableOptions();
         }
     }
