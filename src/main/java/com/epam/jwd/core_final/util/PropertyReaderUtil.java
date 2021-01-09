@@ -1,6 +1,8 @@
 package com.epam.jwd.core_final.util;
 
 import com.epam.jwd.core_final.domain.ApplicationProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,6 +10,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public final class PropertyReaderUtil {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(PropertyReaderUtil.class);
 
     private static final Properties properties = new Properties();
 
@@ -24,9 +28,11 @@ public final class PropertyReaderUtil {
      */
     public ApplicationProperties loadProperties() {
         final String propertiesFileName = "src/main/resources/application.properties";
+
         try (InputStream inputStream = new FileInputStream(propertiesFileName)) {
             properties.load(inputStream);
         } catch (IOException e) {
+            LOGGER.error("Cannot load application properties");
             e.printStackTrace();
         }
         return new ApplicationProperties(

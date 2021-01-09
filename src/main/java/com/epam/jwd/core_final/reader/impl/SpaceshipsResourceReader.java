@@ -1,6 +1,8 @@
 package com.epam.jwd.core_final.reader.impl;
 
 import com.epam.jwd.core_final.reader.ResourceReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,6 +17,8 @@ public enum SpaceshipsResourceReader implements ResourceReader {
 
     INSTANCE;
 
+    public static final Logger LOGGER = LoggerFactory.getLogger(CrewResourceReader.class);
+
     private static final char SHARP = '#';
     private static final char SEMICOLON = ';';
 
@@ -27,6 +31,7 @@ public enum SpaceshipsResourceReader implements ResourceReader {
                     .map(str -> Arrays.asList(str.split(String.valueOf(SEMICOLON))))
                     .collect(Collectors.toList());
         } catch (IOException e) {
+            LOGGER.error("Cannot read file");
             e.printStackTrace();
         }
         return spaceships;
