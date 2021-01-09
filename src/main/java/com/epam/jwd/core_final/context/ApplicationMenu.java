@@ -7,10 +7,12 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.impl.DefaultCrewService;
 import com.epam.jwd.core_final.service.impl.DefaultMissionService;
 import com.epam.jwd.core_final.service.impl.DefaultSpaceshipService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -81,8 +83,36 @@ public interface ApplicationMenu {
                             DefaultSpaceshipService.INSTANCE.findSpaceshipByCriteria(spaceshipCriteria).get());
                     break;
                 case 5:
+                    System.out.println("Enter name of the mission: ");
+                    String nameM = SCANNER.nextLine();
+                    System.out.println("Enter start date of the mission: ");
+                    int dayS = SCANNER.nextInt();
+                    int monthS = SCANNER.nextInt();
+                    int yearS = SCANNER.nextInt();
+                    System.out.println("Enter end date of the mission: ");
+                    int dayE = SCANNER.nextInt();
+                    int monthE = SCANNER.nextInt();
+                    int yearE = SCANNER.nextInt();
+                    System.out.println("Enter distance: ");
+                    Long distance = SCANNER.nextLong();
+                    DefaultMissionService.INSTANCE.createMission(
+                            FlightMissionFactory.INSTANCE.create(
+                                    nameM,
+                                    LocalDate.of(yearS, monthS, dayS),
+                                    LocalDate.of(yearE, monthE, dayE),
+                                    distance));
                     break;
                 case 6:
+                    System.out.println("Make up a criteria to find flight mission(s): ");
+                    System.out.println("Enter flight mission name: ");
+                    String flightMissionNameToUpdate = SCANNER.nextLine();
+                    FlightMissionCriteria flightMissionCriteriaToUpdate =
+                            new FlightMissionCriteria.Builder().withName(flightMissionNameToUpdate).build();
+
+                    DefaultMissionService.INSTANCE.updateFlightMissionDetails(
+                            DefaultMissionService.INSTANCE.findMissionByCriteria(
+                                    flightMissionCriteriaToUpdate).get()
+                    );
                     break;
                 case 7:
                     System.out.println("Make up a criteria to find flight mission(s): ");
