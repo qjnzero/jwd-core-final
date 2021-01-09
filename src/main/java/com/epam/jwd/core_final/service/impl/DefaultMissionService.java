@@ -9,13 +9,10 @@ import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.MissionService;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -90,7 +87,7 @@ public enum DefaultMissionService implements MissionService {
                 .filter(spaceship -> spaceship.getFlightDistance() >= flightMission.getDistance())
                 .filter(spaceship -> spaceship.getReadyForNextMissions().equals(true))
                 .findFirst()
-                .orElseThrow(() -> new InvalidStateException("No spaceship was found. Cannot assign it to mission."));
+                .orElseThrow(() -> new InvalidStateException("Cannot assign spaceship to mission"));
     }
 
     private List<CrewMember> findCrewToAssign(FlightMission flightMission) throws InvalidStateException {
@@ -104,7 +101,7 @@ public enum DefaultMissionService implements MissionService {
                     .collect(Collectors.toList()));
         }
         if (neededCrew.isEmpty()) {
-            throw new InvalidStateException("No crew was found. Cannot assign it to mission.");
+            throw new InvalidStateException("Cannot assign crew to mission");
         }
         return neededCrew;
     }

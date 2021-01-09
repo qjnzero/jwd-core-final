@@ -4,21 +4,13 @@ import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
-import com.epam.jwd.core_final.domain.FlightMission;
-import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Rank;
-import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.DuplicateEntityException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
-import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.CrewService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,7 +52,7 @@ public enum DefaultCrewService implements CrewService {
                 .filter(member -> member.equals(crewMember))
                 .filter(CrewMember::getReadyForNextMissions)
                 .findFirst()
-                .orElseThrow(() -> new InvalidStateException("No available crew member was found to assign."));
+                .orElseThrow(() -> new InvalidStateException("No available crew member was found to assign"));
     }
 
     @Override
@@ -69,7 +61,7 @@ public enum DefaultCrewService implements CrewService {
                 .filter(c -> c.equals(crewMember))
                 .findAny();
         if (duplicate.isPresent()) {
-            throw new DuplicateEntityException("Such a crew member has already been created.");
+            throw new DuplicateEntityException("Such a crew member has already been created");
         }
 
         CrewMember newCrewMember = CrewMemberFactory.INSTANCE.create(

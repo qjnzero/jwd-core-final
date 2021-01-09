@@ -3,9 +3,6 @@ package com.epam.jwd.core_final.service.impl;
 import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
-import com.epam.jwd.core_final.domain.CrewMember;
-import com.epam.jwd.core_final.domain.FlightMission;
-import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.DuplicateEntityException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
@@ -54,7 +51,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
                 .filter(s -> s.equals(spaceship))
                 .filter(Spaceship::getReadyForNextMissions)
                 .findFirst()
-                .orElseThrow(() -> new InvalidStateException("No available spaceship was found to assign."));
+                .orElseThrow(() -> new InvalidStateException("Cannot assign spaceship"));
     }
 
     @Override
@@ -63,7 +60,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
                 .filter(s -> s.equals(spaceship))
                 .findAny();
         if (duplicate.isPresent()) {
-            throw new DuplicateEntityException("Such a spaceship has already been created.");
+            throw new DuplicateEntityException("Such a spaceship has already been created");
         }
 
         Spaceship newSpaceship = SpaceshipFactory.INSTANCE.create(
