@@ -26,7 +26,7 @@ public enum SpaceshipPopulator implements Populator<Spaceship> {
     public Collection<Spaceship> populateFromResources(String filePath) {
         EntityFactory<Spaceship> spaceshipFactory = SpaceshipFactory.INSTANCE;
         List<Spaceship> spaceships = new ArrayList<>();
-        SpaceshipsResourceReader reader = new SpaceshipsResourceReader();
+        SpaceshipsResourceReader reader = SpaceshipsResourceReader.INSTANCE;
         for (List<String> lines: reader.read(filePath)) {
             spaceships.add(spaceshipFactory.create(
                     lines.get(0),

@@ -3,7 +3,7 @@ package com.epam.jwd.core_final.service;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.exception.DuplicateEntityException;
-import sun.plugin.dom.exception.InvalidStateException;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 
 import java.util.List;
 import java.util.Optional;

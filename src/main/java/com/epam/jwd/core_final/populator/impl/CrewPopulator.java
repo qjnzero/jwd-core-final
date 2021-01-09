@@ -20,7 +20,7 @@ public enum CrewPopulator implements Populator<CrewMember> {
     public Collection<CrewMember> populateFromResources(String filePath) {
         EntityFactory<CrewMember> crewMemberFactory = CrewMemberFactory.INSTANCE;
         List<CrewMember> crewMembers = new ArrayList<>();
-        CrewResourceReader reader = new CrewResourceReader();
+        CrewResourceReader reader = CrewResourceReader.INSTANCE;
         for (List<String> lines : reader.read(filePath)) {
             crewMembers.add(crewMemberFactory.create(
                     lines.get(1),

@@ -9,11 +9,11 @@ import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.DuplicateEntityException;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.CrewService;
-import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

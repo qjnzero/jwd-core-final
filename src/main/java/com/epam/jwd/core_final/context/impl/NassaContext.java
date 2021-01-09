@@ -66,7 +66,7 @@ public class NassaContext implements ApplicationContext {
                     applicationProperties.getSpaceshipsFileName());
             new File(OUTPUT_FOLDER_PATH).mkdir();
         } catch (Exception e) {
-            throw new InvalidStateException();
+            throw new InvalidStateException("Cannot read from input file.");
         }
     }
 

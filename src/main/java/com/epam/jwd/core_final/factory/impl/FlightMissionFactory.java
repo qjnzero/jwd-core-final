@@ -17,6 +17,6 @@ public enum FlightMissionFactory implements EntityFactory<FlightMission> {
                 (LocalDate) args[1],
                 (LocalDate) args[2],
                 (Long) args[3],
-                (MissionResult) args[4]);
+                MissionResult.PLANNED);
     }
 }

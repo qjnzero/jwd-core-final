@@ -57,8 +57,8 @@ public enum DefaultMissionService implements MissionService {
     @Override
     public FlightMission createMission(FlightMission flightMission) throws InvalidStateException {
         FlightMission newFlightMission = FlightMissionFactory.INSTANCE.create(
-                flightMission.getStartDate(), flightMission.getStartDate(),
-                flightMission.getDistance(), flightMission.getMissionResult());
+                flightMission.getName(), flightMission.getStartDate(),
+                flightMission.getStartDate(), flightMission.getDistance());
 
 
         Spaceship spaceshipToAssign = findSpaceshipToAssign(newFlightMission);
