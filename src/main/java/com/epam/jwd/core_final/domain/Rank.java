@@ -34,16 +34,25 @@ public enum Rank implements BaseEntity {
      * @throws UnknownEntityException if such id does not exist
      */
     public static Rank resolveRankById(int id) {
-        if (id == 1L) {
-            return Rank.TRAINEE;
-        } else if (id == 2L) {
-            return Rank.SECOND_OFFICER;
-        } else if (id == 3L) {
-            return Rank.FIRST_OFFICER;
-        } else if (id == 4L) {
-            return Rank.CAPTAIN;
-        } else {
-            throw new UnknownEntityException(String.valueOf(id));
+        Rank rank;
+
+        switch (id) {
+            case ((int) 1L):
+                rank = Rank.TRAINEE;
+                break;
+            case ((int) 2L):
+                rank = Rank.SECOND_OFFICER;
+                break;
+            case ((int) 3L):
+                rank = Rank.FIRST_OFFICER;
+                break;
+            case ((int) 4L):
+                rank = Rank.CAPTAIN;
+                break;
+            default:
+                throw new UnknownEntityException("Cannot resolve rank");
         }
+
+        return rank;
     }
 }

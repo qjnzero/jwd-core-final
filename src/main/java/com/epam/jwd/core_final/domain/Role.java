@@ -30,19 +30,29 @@ public enum Role implements BaseEntity {
 
     /**
      * todo via java.lang.enum methods!
+     *
      * @throws UnknownEntityException if such id does not exist
      */
     public static Role resolveRoleById(int id) {
-        if (id == 1L) {
-            return Role.MISSION_SPECIALIST;
-        } else if (id == 2L) {
-            return Role.FLIGHT_ENGINEER;
-        } else if (id == 3L) {
-            return Role.PILOT;
-        } else if (id == 4L) {
-            return Role.COMMANDER;
-        } else {
-            throw new UnknownEntityException(String.valueOf(id));
+        Role role;
+
+        switch (id) {
+            case ((int) 1L):
+                role = Role.MISSION_SPECIALIST;
+                break;
+            case ((int) 2L):
+                role = Role.FLIGHT_ENGINEER;
+                break;
+            case ((int) 3L):
+                role = Role.PILOT;
+                break;
+            case ((int) 4L):
+                role = Role.COMMANDER;
+                break;
+            default:
+                throw new UnknownEntityException("Cannot resolve role");
         }
+
+        return role;
     }
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 public abstract class AbstractBaseEntity implements BaseEntity {
 
     private final Long id;
-
     private final String name;
 
     public AbstractBaseEntity(String name) {
