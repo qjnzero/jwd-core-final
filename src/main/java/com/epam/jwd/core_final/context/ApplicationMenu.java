@@ -99,9 +99,8 @@ public interface ApplicationMenu {
                                     distance));
                     break;
                 case 6:
-                    System.out.println("Make up a criteria to find flight mission(s): ");
-                    System.out.println("Enter flight mission name: ");
-                    String flightMissionNameToUpdate = SCANNER.nextLine();
+                    System.out.print("Make up a criteria to find flight mission(s). Enter flight mission name: ");
+                    String flightMissionNameToUpdate = SCANNER.next();
                     FlightMissionCriteria flightMissionCriteriaToUpdate =
                             new FlightMissionCriteria.Builder().withName(flightMissionNameToUpdate).build();
 
@@ -111,9 +110,8 @@ public interface ApplicationMenu {
                     );
                     break;
                 case 7:
-                    System.out.println("Make up a criteria to find flight mission(s): ");
-                    System.out.println("Enter flight mission name: ");
-                    String flightMissionName = SCANNER.nextLine();
+                    System.out.print("Make up a criteria to find flight mission(s). Enter flight mission name: ");
+                    String flightMissionName = SCANNER.next();
                     FlightMissionCriteria flightMissionCriteriaToPrint =
                             new FlightMissionCriteria.Builder().withName(flightMissionName).build();
 
