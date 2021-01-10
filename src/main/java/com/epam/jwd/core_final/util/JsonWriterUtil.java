@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class JsonWriterUtil {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(JsonWriterUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonWriterUtil.class);
 
     private JsonWriterUtil() {
     }
