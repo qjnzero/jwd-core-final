@@ -1,7 +1,6 @@
 package com.epam.jwd.core_final.factory.impl;
 
 import com.epam.jwd.core_final.domain.FlightMission;
-import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
