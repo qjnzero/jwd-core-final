@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SpaceshipFactoryTest {
 
     @Test
-    void create() {
+    void Create_SimpleValues_ShouldCreateSpaceship() {
         Spaceship actual = SpaceshipFactory.INSTANCE.create(
                 "BestSpaceship",
                 new HashMap<Role, Short>() {{

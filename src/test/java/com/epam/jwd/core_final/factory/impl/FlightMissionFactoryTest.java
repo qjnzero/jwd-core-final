@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FlightMissionFactoryTest {
 
     @Test
-    void create() {
+    void Create_SimpleValues_ShouldCreateFlightMission() {
         FlightMission actual = FlightMissionFactory.INSTANCE.create(
                 "Flight228",
                 LocalDate.of(2002, 1, 30),

@@ -47,7 +47,21 @@ public enum DefaultMissionService implements MissionService {
     @Override
     public FlightMission updateFlightMissionDetails(FlightMission flightMission) {
         Random random = new Random();
-        flightMission.setMissionResult(MissionResult.resolveMissionResultById(random.nextInt(5) + 1));
+        MissionResult missionResult = MissionResult.resolveMissionResultById(random.nextInt(5) + 1);
+        flightMission.setMissionResult(missionResult);
+        Spaceship spaceship = flightMission.getAssignedSpaceShip();
+        List<CrewMember> crewMembers = flightMission.getAssignedCrew();
+        if (missionResult.equals(MissionResult.COMPLETED) || missionResult.equals(MissionResult.CANCELLED)) {
+            DefaultSpaceshipService.INSTANCE.findAllSpaceships().stream()
+                    .filter(s -> s.equals(spaceship))
+                    .findFirst()
+                    .ifPresent(s -> s.setReadyForNextMissions(true));
+            for (CrewMember crewMember : DefaultCrewService.INSTANCE.findAllCrewMembers()) {
+                if (crewMembers.contains(crewMember)) {
+                    crewMember.setReadyForNextMissions(true);
+                }
+            }
+        }
         return flightMission;
     }
 

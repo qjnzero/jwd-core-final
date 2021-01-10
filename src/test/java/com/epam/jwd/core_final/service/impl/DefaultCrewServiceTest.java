@@ -29,7 +29,7 @@ class DefaultCrewServiceTest {
     }
 
     @Test
-    void findAllCrewMembersTest() {
+    void FindAllCrewMembers_SimpleValues_ShouldPass() {
         List<CrewMember> crewMembers = new ArrayList<>();
         crewMembers.add(new CrewMember("Test Name1", Role.COMMANDER, Rank.CAPTAIN));
         crewMembers.add(new CrewMember("Test Name2", Role.PILOT, Rank.FIRST_OFFICER));
@@ -45,7 +45,7 @@ class DefaultCrewServiceTest {
     }
 
     @Test
-    void findCrewMemberByCriteria() {
+    void FindCrewMemberByCriteria_SimpleValues_ShouldFind() {
         List<CrewMember> crewMembers = new ArrayList<>();
         crewMembers.add(new CrewMember("Test Name1", Role.COMMANDER, Rank.CAPTAIN));
         crewMembers.add(new CrewMember("Test Name2", Role.PILOT, Rank.FIRST_OFFICER));
@@ -70,7 +70,7 @@ class DefaultCrewServiceTest {
     }
 
     @Test
-    void findCrewMemberByCriteria_NotFound() {
+    void FindCrewMemberByCriteria_SimpleValues_ShouldNotFound() {
         List<CrewMember> crewMembers = new ArrayList<>();
         crewMembers.add(new CrewMember("Test Name1", Role.COMMANDER, Rank.CAPTAIN));
         crewMembers.add(new CrewMember("Test Name2", Role.PILOT, Rank.FIRST_OFFICER));

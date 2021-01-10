@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CrewMemberFactoryTest {
 
     @Test
-    void create() {
+    void Create_SimpleValues_ShouldCreateCrewMember() {
         CrewMember actual = CrewMemberFactory.INSTANCE.create("Kirill Ostapchuk", Role.COMMANDER, Rank.CAPTAIN);
         assertEquals("Kirill Ostapchuk", actual.getName());
         assertEquals(Role.COMMANDER, actual.getRole());
