@@ -15,6 +15,7 @@ public final class ConsoleReaderUtil {
     public static String readLine(String msg) {
         printMsgToConsole(msg);
 
+        SCANNER.nextLine();
         return SCANNER.nextLine();
     }
 
@@ -35,5 +36,11 @@ public final class ConsoleReaderUtil {
         printMsgToConsole(msg);
 
         return SCANNER.nextLong();
+    }
+
+    public static int readInt(String msg) {
+        printMsgToConsole(msg);
+
+        return SCANNER.nextInt();
     }
 }

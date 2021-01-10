@@ -14,6 +14,7 @@ public interface Application {
         final NassaContext nassaContext = new NassaContext();
 
         nassaContext.init();
+        startMenu.createEndlessMenu();
         return applicationContextSupplier::get;
     }
 }

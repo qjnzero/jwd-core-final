@@ -7,6 +7,7 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.impl.DefaultCrewService;
 import com.epam.jwd.core_final.service.impl.DefaultMissionService;
@@ -16,8 +17,10 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readDate;
+import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readInt;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readLine;
 import static com.epam.jwd.core_final.util.ConsoleReaderUtil.readLong;
 import static com.epam.jwd.core_final.util.ConsoleWriterUtil.printCollectionToConsole;
@@ -31,6 +34,14 @@ public interface ApplicationMenu {
     Logger LOGGER = LoggerFactory.getLogger(ApplicationMenu.class);
 
     ApplicationContext getApplicationContext();
+
+    default void createEndlessMenu() {
+        while (true) {
+            printMsgToConsole(printAvailableOptions());
+            int input = readInt("Enter a number to continue: ");
+            handleUserInput(input);
+        }
+    }
 
     default String printAvailableOptions() {
         return "Menu:\n" +
@@ -71,9 +82,13 @@ public interface ApplicationMenu {
                             "Enter a name to find crew member: ");
 
                     CrewMemberCriteria criteriaCrewMember = new CrewMemberCriteria.Builder().withName(crewMemberCriteriaName).build();
-                    DefaultCrewService.INSTANCE.updateCrewMemberDetails(
-                            DefaultCrewService.INSTANCE.findCrewMemberByCriteria(criteriaCrewMember).get());
-                    printMsgToConsole("Updating of crew member finished");
+                    Optional<CrewMember> crewMemberByCriteria = DefaultCrewService.INSTANCE.findCrewMemberByCriteria(criteriaCrewMember);
+                    if (crewMemberByCriteria.isPresent()) {
+                        DefaultCrewService.INSTANCE.updateCrewMemberDetails(crewMemberByCriteria.get());
+                        printMsgToConsole("Updating of crew member finished");
+                    } else {
+                        printMsgToConsole("Cannot update crew member");
+                    }
                     break;
                 case 4:
                     LOGGER.info("User chose to update spaceship");
@@ -82,9 +97,13 @@ public interface ApplicationMenu {
                     String spaceshipCriteriaName = readLine("Make up a criteria to update spaceship. " +
                             "Enter a name to find spaceship: ");
                     SpaceshipCriteria spaceshipCriteria = new SpaceshipCriteria.Builder().withName(spaceshipCriteriaName).build();
-                    DefaultSpaceshipService.INSTANCE.updateSpaceshipDetails(
-                            DefaultSpaceshipService.INSTANCE.findSpaceshipByCriteria(spaceshipCriteria).get());
-                    printMsgToConsole("Updating of spaceship finished");
+                    Optional<Spaceship> spaceshipByCriteria = DefaultSpaceshipService.INSTANCE.findSpaceshipByCriteria(spaceshipCriteria);
+                    if (spaceshipByCriteria.isPresent()) {
+                        DefaultSpaceshipService.INSTANCE.updateSpaceshipDetails(spaceshipByCriteria.get());
+                        printMsgToConsole("Updating of spaceship finished");
+                    } else {
+                        printMsgToConsole("Cannot update spaceship");
+                    }
                     break;
                 case 5:
                     LOGGER.info("User chose to create mission");
@@ -107,11 +126,14 @@ public interface ApplicationMenu {
                             "Enter a name to find flight mission: ");
                     FlightMissionCriteria flightMissionCriteriaToUpdate =
                             new FlightMissionCriteria.Builder().withName(flightMissionCriteriaName).build();
-
-                    DefaultMissionService.INSTANCE.updateFlightMissionDetails(
-                            DefaultMissionService.INSTANCE.findMissionByCriteria(
-                                    flightMissionCriteriaToUpdate).get());
-                    printMsgToConsole("Updating of mission finished");
+                    Optional<FlightMission> missionByCriteria =
+                            DefaultMissionService.INSTANCE.findMissionByCriteria(flightMissionCriteriaToUpdate);
+                    if (missionByCriteria.isPresent()) {
+                        DefaultMissionService.INSTANCE.updateFlightMissionDetails(missionByCriteria.get());
+                        printMsgToConsole("Updating of mission finished");
+                    } else {
+                        printMsgToConsole("Cannot update mission");
+                    }
                     break;
                 case 7:
                     LOGGER.info("User chose to print mission to json file");
