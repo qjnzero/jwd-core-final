@@ -11,7 +11,7 @@ public interface Application {
     static ApplicationMenu start() throws InvalidStateException {
         final StartMenu startMenu = new StartMenu();
         final Supplier<ApplicationContext> applicationContextSupplier = startMenu::getApplicationContext; // todo
-        final NassaContext nassaContext = new NassaContext();
+        final NassaContext nassaContext = NassaContext.INSTANCE;
 
         nassaContext.init();
         startMenu.createEndlessMenu();

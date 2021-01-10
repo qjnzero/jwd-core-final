@@ -7,6 +7,6 @@ public class StartMenu implements ApplicationMenu {
 
     @Override
     public ApplicationContext getApplicationContext() {
-        return new NassaContext();
+        return NassaContext.INSTANCE;
     }
 }

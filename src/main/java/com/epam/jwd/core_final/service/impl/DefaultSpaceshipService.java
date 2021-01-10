@@ -18,7 +18,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
 
     INSTANCE;
 
-    private final ApplicationContext NASSA_CONTEXT = new NassaContext();
+    private final ApplicationContext NASSA_CONTEXT = NassaContext.INSTANCE;
 
     @Override
     public List<Spaceship> findAllSpaceships() {
@@ -67,7 +67,7 @@ public enum DefaultSpaceshipService implements SpaceshipService {
                 spaceship.getName(),
                 spaceship.getCrew(),
                 spaceship.getFlightDistance());
-        NassaContext.addEntityToStorage(newSpaceship, Spaceship.class);
+        NASSA_CONTEXT.addEntityToStorage(newSpaceship, Spaceship.class);
         return newSpaceship;
     }
 }

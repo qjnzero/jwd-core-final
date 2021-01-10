@@ -18,23 +18,28 @@ import java.util.Collection;
 import java.util.Collections;
 
 // todo
-public class NassaContext implements ApplicationContext {
+public enum NassaContext implements ApplicationContext {
+
+    INSTANCE;
 
     private static final ApplicationProperties applicationProperties;
     public static final String OUTPUT_FILE_PATH;
-    public static final String OUTPUT_FOLDER_PATH;
+    public static final String PATH_PREFIX;
+    public static final Character BACK_SLASH;
 
     static {
+        PATH_PREFIX = "src/main/resources/";
+        BACK_SLASH = '/';
+
         applicationProperties = PropertyReaderUtil.getInstance().loadProperties();
-        OUTPUT_FILE_PATH = "src/main/resources/" + applicationProperties.getOutputRootDir() + "/" +
+        OUTPUT_FILE_PATH = PATH_PREFIX + applicationProperties.getOutputRootDir() + BACK_SLASH +
                 applicationProperties.getMissionsFileName();
-        OUTPUT_FOLDER_PATH = "src/main/resources/" + applicationProperties.getOutputRootDir();
     }
 
     // no getters/setters for them
-    private static Collection<CrewMember> crewMembers = new ArrayList<>();
-    private static Collection<Spaceship> spaceships = new ArrayList<>();
-    private static Collection<FlightMission> flightMissions = new ArrayList<>();
+    private Collection<CrewMember> crewMembers = new ArrayList<>();
+    private Collection<Spaceship> spaceships = new ArrayList<>();
+    private final Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
     public <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass) {
@@ -42,7 +47,7 @@ public class NassaContext implements ApplicationContext {
             return (Collection<T>) crewMembers;
         } else if (tClass.equals(Spaceship.class) && spaceships != null) {
             return (Collection<T>) spaceships;
-        } else if (tClass.equals(FlightMission.class) && flightMissions != null) {
+        } else if (tClass.equals(FlightMission.class)) {
             return (Collection<T>) flightMissions;
         } else {
             return Collections.emptyList();
@@ -58,27 +63,29 @@ public class NassaContext implements ApplicationContext {
     @Override
     public void init() throws InvalidStateException {
         try {
-            readCrewResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
-                    applicationProperties.getCrewFileName());
-            readSpaceshipResourcesFrom("src/main/resources/" + applicationProperties.getInputRootDir() + "/" +
-                    applicationProperties.getSpaceshipsFileName());
-            new File(OUTPUT_FOLDER_PATH).mkdir();
+            readCrewResourcesFrom();
+            readSpaceshipResourcesFrom();
+            new File(PATH_PREFIX + applicationProperties.getOutputRootDir()).mkdir();
         } catch (Exception e) {
-            throw new InvalidStateException("Cannot read from input file.");
+            throw new InvalidStateException("Cannot read from input file");
         }
     }
 
-    private void readCrewResourcesFrom(String filePath) {
+    private void readCrewResourcesFrom() {
         Populator<CrewMember> crewPopulator = CrewPopulator.INSTANCE;
-        crewMembers = crewPopulator.populateFromResources(filePath);
+        crewMembers = crewPopulator.populateFromResources(
+                PATH_PREFIX + applicationProperties.getInputRootDir() + BACK_SLASH +
+                        applicationProperties.getCrewFileName());
     }
 
-    private void readSpaceshipResourcesFrom(String filePath) {
+    private void readSpaceshipResourcesFrom() {
         Populator<Spaceship> spaceshipPopulator = SpaceshipPopulator.INSTANCE;
-        spaceships = spaceshipPopulator.populateFromResources(filePath);
+        spaceships = spaceshipPopulator.populateFromResources(
+                PATH_PREFIX + applicationProperties.getInputRootDir() + BACK_SLASH +
+                        applicationProperties.getSpaceshipsFileName());
     }
 
-    public static <T extends BaseEntity> void addEntityToStorage(T baseEntity, Class<T> tClass) {
+    public <T extends BaseEntity> void addEntityToStorage(T baseEntity, Class<T> tClass) {
         if (tClass.equals(CrewMember.class)) {
             crewMembers.add((CrewMember) baseEntity);
         } else if (tClass.equals(Spaceship.class)) {

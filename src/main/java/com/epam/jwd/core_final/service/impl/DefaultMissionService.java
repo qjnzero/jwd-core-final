@@ -23,7 +23,7 @@ public enum DefaultMissionService implements MissionService {
 
     INSTANCE;
 
-    private static final ApplicationContext NASSA_CONTEXT = new NassaContext();
+    private static final ApplicationContext NASSA_CONTEXT = NassaContext.INSTANCE;
 
     @Override
     public List<FlightMission> findAllMissions() {
@@ -78,7 +78,7 @@ public enum DefaultMissionService implements MissionService {
         }
         newFlightMission.setAssignedCrew(crewToAssign);
 
-        NassaContext.addEntityToStorage(newFlightMission, FlightMission.class);
+        NASSA_CONTEXT.addEntityToStorage(newFlightMission, FlightMission.class);
         return newFlightMission;
     }
 

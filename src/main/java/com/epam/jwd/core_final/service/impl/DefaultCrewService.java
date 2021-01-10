@@ -19,7 +19,7 @@ public enum DefaultCrewService implements CrewService {
 
     INSTANCE;
 
-    private final ApplicationContext NASSA_CONTEXT = new NassaContext();
+    private final ApplicationContext NASSA_CONTEXT = NassaContext.INSTANCE;
 
     @Override
     public List<CrewMember> findAllCrewMembers() {
@@ -68,7 +68,7 @@ public enum DefaultCrewService implements CrewService {
                 crewMember.getName(),
                 crewMember.getRole(),
                 crewMember.getRank());
-        NassaContext.addEntityToStorage(newCrewMember, CrewMember.class);
+        NASSA_CONTEXT.addEntityToStorage(newCrewMember, CrewMember.class);
         return newCrewMember;
     }
 }

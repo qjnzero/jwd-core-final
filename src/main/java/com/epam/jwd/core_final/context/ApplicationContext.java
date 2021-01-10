@@ -10,4 +10,6 @@ public interface ApplicationContext {
     <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass);
 
     void init() throws InvalidStateException;
+
+    <T extends BaseEntity> void addEntityToStorage(T baseEntity, Class<T> tClass);
 }
