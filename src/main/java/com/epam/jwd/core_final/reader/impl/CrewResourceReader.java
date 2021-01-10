@@ -18,7 +18,7 @@ public enum CrewResourceReader implements ResourceReader {
 
     INSTANCE;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(CrewResourceReader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrewResourceReader.class);
 
 
     private static final char SHARP = '#';
@@ -36,7 +36,6 @@ public enum CrewResourceReader implements ResourceReader {
                     .collect(Collectors.toList());
         } catch (IOException e) {
             LOGGER.error("Cannot read file");
-            e.printStackTrace();
         }
         return crews;
     }

@@ -7,10 +7,13 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.impl.DefaultCrewService;
 import com.epam.jwd.core_final.service.impl.DefaultMissionService;
 import com.epam.jwd.core_final.service.impl.DefaultSpaceshipService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,6 +27,8 @@ import static com.epam.jwd.core_final.util.JsonWriterUtil.writeToJsonFile;
 public interface ApplicationMenu {
 
     Scanner SCANNER = new Scanner(System.in);
+
+    Logger LOGGER = LoggerFactory.getLogger(ApplicationMenu.class);
 
     ApplicationContext getApplicationContext();
 
@@ -46,17 +51,21 @@ public interface ApplicationMenu {
         try {
             switch (input) {
                 case 1:
+                    LOGGER.info("User chose to print crew members");
                     System.out.println("{");
                     crewMembers.forEach(System.out::println);
                     System.out.println("}");
-                    System.out.println("");
+                    System.out.println("Finish printing");
                     break;
                 case 2:
+                    LOGGER.info("User chose to print spaceships");
                     System.out.println("{");
                     spaceships.forEach(System.out::println);
                     System.out.println("}");
+                    System.out.println("Finish printing");
                     break;
                 case 3:
+                    LOGGER.info("User chose to update crew member");
                     System.out.println("{");
                     crewMembers.forEach(System.out::println);
                     System.out.println("}");
@@ -68,6 +77,7 @@ public interface ApplicationMenu {
                             DefaultCrewService.INSTANCE.findCrewMemberByCriteria(criteriaCrewMember).get());
                     break;
                 case 4:
+                    LOGGER.info("User chose to update spaceship");
                     System.out.println("{");
                     spaceships.forEach(System.out::println);
                     System.out.println("}");
@@ -79,6 +89,7 @@ public interface ApplicationMenu {
                             DefaultSpaceshipService.INSTANCE.findSpaceshipByCriteria(spaceshipCriteria).get());
                     break;
                 case 5:
+                    LOGGER.info("User chose to create mission");
                     System.out.println("Enter name of the mission: ");
                     String nameM = SCANNER.nextLine();
                     System.out.println("Enter start date of the mission: ");
@@ -99,6 +110,7 @@ public interface ApplicationMenu {
                                     distance));
                     break;
                 case 6:
+                    LOGGER.info("User chose to update mission");
                     System.out.print("Make up a criteria to find flight mission(s). Enter flight mission name: ");
                     String flightMissionNameToUpdate = SCANNER.next();
                     FlightMissionCriteria flightMissionCriteriaToUpdate =
@@ -110,6 +122,7 @@ public interface ApplicationMenu {
                     );
                     break;
                 case 7:
+                    LOGGER.info("User chose to print mission to json file");
                     System.out.print("Make up a criteria to find flight mission(s). Enter flight mission name: ");
                     String flightMissionName = SCANNER.next();
                     FlightMissionCriteria flightMissionCriteriaToPrint =
@@ -119,9 +132,11 @@ public interface ApplicationMenu {
                             NassaContext.OUTPUT_FILE_PATH);
                     break;
                 case 8:
+                    LOGGER.info("User chose to exit");
                     System.exit(0);
                     break;
                 default:
+                    LOGGER.info("User chose unknown operation");
                     System.out.println("No such operation found");
                     break;
             }

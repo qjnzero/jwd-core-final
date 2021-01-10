@@ -11,7 +11,7 @@ public enum FlightMissionFactory implements EntityFactory<FlightMission> {
 
     INSTANCE;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(FlightMissionFactory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlightMissionFactory.class);
 
     @Override
     public FlightMission create(Object... args) {

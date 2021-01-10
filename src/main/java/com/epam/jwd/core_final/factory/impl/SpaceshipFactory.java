@@ -12,7 +12,7 @@ public enum SpaceshipFactory implements EntityFactory<Spaceship> {
 
     INSTANCE;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(SpaceshipFactory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpaceshipFactory.class);
 
     @Override
     public Spaceship create(Object... args) {

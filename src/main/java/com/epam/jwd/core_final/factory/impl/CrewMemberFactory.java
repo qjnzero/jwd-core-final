@@ -12,7 +12,7 @@ public enum CrewMemberFactory implements EntityFactory<CrewMember> {
 
     INSTANCE;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(CrewMemberFactory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrewMemberFactory.class);
 
     @Override
     public CrewMember create(Object... args) {

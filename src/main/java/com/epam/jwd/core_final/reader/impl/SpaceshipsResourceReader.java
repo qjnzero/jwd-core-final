@@ -17,7 +17,7 @@ public enum SpaceshipsResourceReader implements ResourceReader {
 
     INSTANCE;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(CrewResourceReader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrewResourceReader.class);
 
     private static final char SHARP = '#';
     private static final char SEMICOLON = ';';
@@ -32,7 +32,6 @@ public enum SpaceshipsResourceReader implements ResourceReader {
                     .collect(Collectors.toList());
         } catch (IOException e) {
             LOGGER.error("Cannot read file");
-            e.printStackTrace();
         }
         return spaceships;
     }
